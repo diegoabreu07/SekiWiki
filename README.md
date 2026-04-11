@@ -7,7 +7,7 @@ Um site interativo inspirado em Sekiro: Shadows Die Twice, com foco em um guia c
 
 O SekiWiki é um site desenvolvido com o objetivo de ajudar jogadores a alcançarem 100% de progresso em Sekiro, oferecendo:
 
-- Localização do mapa do jogo
+- Localizações dos itens e bosses do jogo
 - Dicas de bosses
 - Lista de troféus
 - Informações organizadas de forma visual e interativa
