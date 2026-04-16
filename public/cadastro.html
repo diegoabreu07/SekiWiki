@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/cadastro-login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <title>SekiWiki - Cadastro</title>
+</head>
+
+<body>
+      <div class="header">
+        <div class="container">
+            <h1 class="titulo">SekiWiki</h1>
+            <ul class="navbar">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="login.html">Login</a></li>
+            <li class="atual"><a href="#">Cadastro</a></li>
+        </ul>
+
+        </div>
+     </div>
+
+    <div class="painel-cadastro">
+
+        <div class="cadastro_usuario">
+            <div class="info">
+                <div class="formulario">
+                    <h3>Cadastro de Usuário</h3>
+                    <input type="text" id="ipt_nome_usuario" placeholder="Nome">
+                    <input type="text" id="ipt_email" placeholder="Email">
+
+                    <div oninput="validar()" class="validacao-campo">
+                        <input type="password" id="ipt_senha" placeholder="Senha">
+                        <i class="fa-solid fa-eye olho" onclick="mostrar()"></i>
+                        <div id="validacao" class="validacao"></div>
+                    </div>
+
+                    <div oninput="senhasCoincidem()" class="validacao-campo">
+                        <input type="password" id="ipt_senha_confirmada" placeholder="Insira novamente sua Senha">
+                        <i class="fa-solid fa-eye olho" onclick="mostrar2()"></i>
+                        <div id="validacao2" class="validacao2"></div>
+                    </div>
+
+
+                    <button onclick="registrar()">Cadastrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+    let validacaoFeita = false
+    function registrar() {
+        let nome = ipt_nome_usuario.value
+        let email = ipt_email.value
+        let senha = ipt_senha.value
+        let senhaConfirmada = ipt_senha_confirmada.value
+        let verificacaoEmailArroba = email.indexOf('@')
+        let verificacaoEmailPonto = email.indexOf('.')
+
+        if (nome == '' || email == '' || senha == '' || senhaConfirmada == '') {
+            alert('Todos os campos devem ser preenchidos para o cadastro!')
+        } else {
+            if (verificacaoEmailArroba == -1) {
+                alert('Insira um email válido')
+                validacaoFeita = false
+            } else if (verificacaoEmailPonto == -1) {
+                alert('Insira um email válido')
+                validacaoFeita = false
+            } else if (senha != senhaConfirmada) {
+                alert('As senhas não se coincidem')
+                validacaoFeita = false
+            } else {
+                validacaoFeita = true
+            }
+
+            if (validacaoFeita) {
+                alert('Cadastro realizado!')
+                ipt_nome_usuario.value = ''
+                ipt_email.value = ''
+                ipt_senha.value = ''
+                ipt_senha_confirmada.value = ''
+            }
+        }
+
+
+    }
+    function validar() {
+        let senha = ipt_senha.value
+        let senhaConfirmada = ipt_senha_confirmada.value
+        let tamanho = senha.length
+        let senhaMaiuscula = senha.toUpperCase()
+        let senhaMinuscula = senha.toLowerCase()
+        let especial = ['!', '@', '#', '$', '%', '&', '*', '~', ';', '.', ',', '/', '+', '-', '=', '|']
+        let temEspecial = false
+
+        console.log('Entra validar');
+        if (tamanho < 8) {
+            validacao.innerHTML = `A senha precisa ter no mínimo 8 caracteres`
+            console.log('Senha -8');
+        } else if (senha == senhaMaiuscula) {
+            validacao.innerHTML = 'A senha precisa conter ao menos uma letra minúscula'
+        } else if (senha == senhaMinuscula) {
+            validacao.innerHTML = 'A senha precisa conter ao menos uma letra maiúscula'
+        } else {
+            for (let i = 0; i < tamanho; i++) {
+                if (especial.includes(senha[i])) {
+                    temEspecial = true;
+                    break;
+                }
+            }
+
+            if (!temEspecial) {
+                validacao.innerHTML = 'A senha precisa ter pelo menos um caractere especial'
+            } else {
+                validacao.innerHTML = ``
+                validacaoFeita = true
+            }
+        }
+    }
+
+    function senhasCoincidem() {
+        let senha = ipt_senha.value
+        let senhaConfirmada = ipt_senha_confirmada.value
+
+        if (senha != senhaConfirmada) {
+            validacao2.innerHTML = `As senhas não se coincidem`
+            validacaoFeita = false
+        } else {
+            validacao2.innerHTML = ''
+            validacaoFeita = true
+        }
+    }
+    function mostrar() {
+        if (ipt_senha.type === "password") {
+            ipt_senha.type = "text";
+        } else {
+            ipt_senha.type = "password";
+        }
+    }
+    function mostrar2() {
+        if (ipt_senha_confirmada.type === "password") {
+            ipt_senha_confirmada.type = "text";
+        } else {
+            ipt_senha_confirmada.type = "password";
+        }
+    }
+
+</script>

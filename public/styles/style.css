@@ -11,16 +11,18 @@ body {
     background-color: black;
     justify-content: space-between;
     border-bottom: 2px solid rgb(223, 164, 87);
+    height: 85px;
 }
 
 .header .container{
-    padding: 20px;
+    align-items: center;
     display: flex;
     justify-content: space-between;
 }
 .titulo{
     color: rgb(223, 164, 87);
     padding-left: 80px;
+    text-align: center;
 }
  .navbar {
     display: flex;
@@ -28,6 +30,7 @@ body {
     gap: 50px;
     color: burlywood;
     list-style: none;
+    padding-right: 20px;
  }
 
  .navbar li {
