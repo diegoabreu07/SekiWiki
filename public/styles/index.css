@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap');
+
+body {
+    background-color: #0d0d0d;
+    color: #e6e6e6;
+    font-family: 'Cinzel', sans-serif;
+    margin: 0;
+}
+
+.header {
+    background-color: black;
+    justify-content: space-between;
+    border-bottom: 2px solid rgb(223, 164, 87);
+    height: 85px;
+}
+
+.header .container {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+.titulo {
+    color: rgb(223, 164, 87);
+    padding-left: 80px;
+    text-align: center;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    color: burlywood;
+    list-style: none;
+    padding-right: 20px;
+}
+
+.navbar li {
+    color: burlywood;
+}
+
+.navbar a {
+    color: burlywood;
+    text-decoration: none;
+}
+
+.atual {
+    font-weight: bold;
+}
+
+.banner {
+    background-image: url(../../assets/img/sekiro.png);
+    background-position: center;
+    height: 1080px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    align-items: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.banner .container {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 40px;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.topo {
+    padding-bottom: 25px;
+    width: 700px;
+}
+
+.cards {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.card {
+    width: 220px;
+    padding: 20px;
+    background: rgb(14, 13, 13);
+    border-radius: 10px;
+    text-align: center;
+    transition: 0.3s;
+    border: 1px solid transparent;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    border: 1px solid red;
+    cursor: pointer;
+}
+
+.banner2 {
+    background-image: url(../../assets/img/sekiro-painel.png);
+    background-position: center;
+    height: 1080px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    align-items: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.painel {
+    display: flex;
+    flex: 1;
+    justify-content: left;
+    align-items: center;
+    height: 100vh;
+    background-image: url(../../assets/img/sekiro-painel.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.banner2 .container {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 40px;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.footer .container h4 {
+    display: flex;
+    margin-top: 30px;
+    justify-content: center;
+    height: 25px;
+}
