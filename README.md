@@ -3,7 +3,7 @@
 Um site interativo inspirado em Sekiro: Shadows Die Twice, com foco em um guia completo para conquistar a platina do jogo.
 
 
-## 📖 Sobre o projeto
+## Sobre o projeto
 
 O SekiWiki é um site desenvolvido com o objetivo de ajudar jogadores a alcançarem 100% de progresso em Sekiro, oferecendo:
 
@@ -14,12 +14,12 @@ O SekiWiki é um site desenvolvido com o objetivo de ajudar jogadores a alcança
 
 ---
 
-## 🎯 Objetivo
+##  Objetivo
 
 Criar uma experiência semelhante a um guia interativo, simulando elementos de jogos dentro de um site.
 
 ---
 
-## 📌 Status
+##  Status
 
-🚧 Em desenvolvimento
+ Em desenvolvimento
