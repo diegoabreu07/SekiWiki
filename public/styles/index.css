@@ -75,28 +75,6 @@ body {
     width: 700px;
 }
 
-.cards {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-}
-
-.card {
-    width: 220px;
-    padding: 20px;
-    background: rgb(14, 13, 13);
-    border-radius: 10px;
-    text-align: center;
-    transition: 0.3s;
-    border: 1px solid transparent;
-}
-
-.card:hover {
-    transform: scale(1.05);
-    border: 1px solid red;
-    cursor: pointer;
-}
-
 .banner2 {
     background-image: url(../../assets/img/sekiro-painel.png);
     background-position: center;
@@ -110,16 +88,7 @@ body {
     background-size: cover;
 }
 
-.painel {
-    display: flex;
-    flex: 1;
-    justify-content: left;
-    align-items: center;
-    height: 100vh;
-    background-image: url(../../assets/img/sekiro-painel.png);
-    background-repeat: no-repeat;
-    background-size: cover;
-}
+
 .banner2 .container {
     display: flex;
     background: rgba(0, 0, 0, 1);
@@ -129,6 +98,99 @@ body {
     margin-top: 30px;
     margin-bottom: 25px;
     margin-right: 650px;
+}
+
+.banner3 {
+    background-image: url(../../assets/img/sekiro-banner3.png);
+    background-position: center;
+    height: 1080px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    align-items: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.banner3 .container {
+    display: flex;
+    margin-bottom: 200px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    text-align: center;
+    width: 550px;
+}
+
+.banner3 .topo {
+    margin-bottom: -25px;
+}
+
+.funcionalidades {
+    display: flex;
+    margin-bottom: 100px;
+    justify-content: center;
+    gap: 35px;
+}
+
+.funcionalidades .card-funcionalidade {
+    width: 220px;
+    height: 220px;
+    padding: 40px;
+    background: rgb(14, 13, 13);
+    border-radius: 10px;
+    text-align: center;
+    border: 1px solid rgb(223, 164, 87);
+    font-size: 20px;
+}
+
+#mapa {
+    background:
+        linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+        url(../../assets/img/imagem-funcionalidade3-removebg-preview.png);
+    background-size: cover;
+}
+
+#boss {
+    background:
+        linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+        url(../../assets/img/imagem-funcionalidade1-removebg-preview.png);
+    background-size: cover;
+}
+
+#conquista {
+    background:
+        linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+        url(../../assets/img/imagem-funcionalidade2-removebg-preview.png);
+    background-size: cover;
+}
+
+#dash {
+    background:
+        linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+        url(../../assets/img/imagem-funcionalidade4-removebg-preview.png);
+    background-size: cover;
+}
+
+.banner3 button {
+    background: radial-gradient(circle, rgb(223, 164, 87) 0%, rgb(85, 60, 3) 100% ) ;
+    display: flex;
+    color: white;
+    border: 1px, ;
+    border-radius: 10px;
+    height: 50px;
+    width: auto;
+    font-size: 24px;
+    font-family: 'Cinzel', sans-serif;
+    padding: 40px;
+    align-items: center;
+}
+
+.banner3 button:hover {
+    transform: scale(1.025);
+    background-color: rgb(223, 164, 30);
+    cursor: pointer;
 }
 
 .footer .container h4 {
