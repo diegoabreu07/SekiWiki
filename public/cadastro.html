@@ -10,17 +10,17 @@
 </head>
 
 <body>
-      <div class="header">
+    <div class="header">
         <div class="container">
             <h1 class="titulo">SekiWiki</h1>
             <ul class="navbar">
-            <li><a href="home.html">Home</a></li>
-            <li><a href="login.html">Login</a></li>
-            <li class="atual"><a href="#">Cadastro</a></li>
-        </ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li class="atual"><a href="#">Cadastro</a></li>
+            </ul>
 
         </div>
-     </div>
+    </div>
 
     <div class="painel-cadastro">
 
@@ -55,14 +55,14 @@
 <script>
     let validacaoFeita = false
     function registrar() {
-        let nome = ipt_nome_usuario.value
-        let email = ipt_email.value
-        let senha = ipt_senha.value
-        let senhaConfirmada = ipt_senha_confirmada.value
-        let verificacaoEmailArroba = email.indexOf('@')
-        let verificacaoEmailPonto = email.indexOf('.')
+        let nomeVar = ipt_nome_usuario.value
+        let emailVar = ipt_email.value
+        let senhaVar = ipt_senha.value
+        let senhaConfirmadaVar = ipt_senha_confirmada.value
+        let verificacaoEmailArroba = emailVar.indexOf('@')
+        let verificacaoEmailPonto = emailVar.indexOf('.')
 
-        if (nome == '' || email == '' || senha == '' || senhaConfirmada == '') {
+        if (nomeVar == '' || emailVar == '' || senhaVar == '' || senhaConfirmadaVar == '') {
             alert('Todos os campos devem ser preenchidos para o cadastro!')
         } else {
             if (verificacaoEmailArroba == -1) {
@@ -71,7 +71,7 @@
             } else if (verificacaoEmailPonto == -1) {
                 alert('Insira um email válido')
                 validacaoFeita = false
-            } else if (senha != senhaConfirmada) {
+            } else if (senhaVar != senhaConfirmadaVar) {
                 alert('As senhas não se coincidem')
                 validacaoFeita = false
             } else {
@@ -79,7 +79,6 @@
             }
 
             if (validacaoFeita) {
-                alert('Cadastro realizado!')
                 ipt_nome_usuario.value = ''
                 ipt_email.value = ''
                 ipt_senha.value = ''
@@ -87,6 +86,38 @@
             }
         }
 
+        fetch("/usuarios/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                nomeServer: nomeVar,
+                emailServer: emailVar,
+                senhaServer: senhaVar,
+            }),
+        })
+            .then(function (resposta) {
+                console.log("resposta: ", resposta);
+
+                if (resposta.ok) {
+                    alert("Cadastro realizado com sucesso! Redirecionando para tela de Login...")
+
+                    setTimeout(() => {
+                        window.location = "login.html";
+                    }, "1000");
+
+                } else {
+                    throw "Houve um erro ao tentar realizar o cadastro!";
+                }
+            })
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+            });
+
+        return false;
 
     }
     function validar() {

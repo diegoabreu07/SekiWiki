@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -44,31 +45,63 @@
 
 </html>
 <script>
-    let tentativas = 3
     function entrar() {
-        let email = ipt_email.value
-        let senha = ipt_senha.value
+        let emailVar = ipt_email.value
+        let senhaVar = ipt_senha.value
 
-        let email_certo = `diego.souza@sptech.school`
-        let senha_certa = `Diego123!`
+        if (emailVar == "" || senhaVar == "") {
+            alert('Todos os campos devem ser preenchidos')
+            return false;
+        }
+        else {
+            setInterval(5000)
+        }
 
-        while (tentativas > 0) {
-            if (email == email_certo && senha == senha_certa) {
-                window.location.href = "index.html"
-                break;  
+        console.log("FORM LOGIN: ", emailVar);
+        console.log("FORM SENHA: ", senhaVar);
+
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: emailVar,
+                senhaServer: senhaVar
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_USUARIO = json.idUsuario;
+
+                    setTimeout(function () {
+                        window.location = "index.html";
+                    }, 1000); // apenas para exibir o loading
+
+                });
+
             } else {
-                tentativas--
-                alert(`Usuário ou senha inválidos! Tentativas restantes: ${tentativas}`)
-                break;
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                });
             }
 
-        }
+        }).catch(function (erro) {
+            console.log(erro);
+        })
 
-        if (tentativas == 0) {
-            alert('Muitas tentativas falhas de login! Redirecionando para a página inicial')
-            window.location.href = "home.html"
-        }
-
+        return false;
     }
 
     function mostrar() {
