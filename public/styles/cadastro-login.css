@@ -1,4 +1,5 @@
    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap');
+   @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap');
 
    * {
        font-family: 'Cinzel', sans-serif;
@@ -82,6 +83,7 @@
    }
 
    .formulario input {
+    font-family: 'Noto Serif', sans-serif;
        color: burlywood;
        background: transparent;
        border: none;
@@ -117,7 +119,7 @@
 
 
    .painel-login {
-       background-image: url(../../assets/img/sekiro-login.png);
+       background-image: url(../assets/img/sekiro-login.png);
        background-position: center;
        height: 1080px;
        display: flex;
@@ -137,7 +139,7 @@
    }
 
    .painel-cadastro {
-       background-image: url(../../assets/img/sekiro-cadastro.png);
+       background-image: url(../assets/img/sekiro-cadastro.png);
        background-position: center;
        height: 1080px;
        display: flex;

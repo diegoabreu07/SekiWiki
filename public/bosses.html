@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/bosses.css">
+    <title>SekiWiki | Bosses</title>
+</head>
+
+<body>
+    <div class="header">
+        <div class="container">
+            <h1 class="titulo">SekiWiki</h1>
+            <ul class="navbar">
+                <li><a href="indexCadastrado.html">Home</a></li>
+                <li><a href="mapa.html">Mapa</a></li>
+                <li class="atual"><a href="#">Bosses</a></li>
+                <li><a href="conquista.html">Conquistas</a></li>
+            </ul>
+            <div class="usuario">
+                <img src="assets/img/usuario-index.png" alt="">
+            </div>
+        </div>
+    </div>
+
+    <h1 class="titulo">Bosses</h1>
+
+    <div class="boss-grid">
+
+        <div class="boss-card" data-boss="gyoubu">
+            <img src="assets/img/gyoubu.png">
+            <h3>Gyoubu Masataka Oniwa</h3>
+        </div>
+
+        <div class="boss-card" data-boss="butterfly">
+            <img src="assets/img/butterfly.png">
+            <h3>Lady Butterfly</h3>
+        </div>
+
+        <div class="boss-card" data-boss="genichiro">
+            <img src="assets/img/genichiro.png">
+            <h3>Genichiro Ashina</h3>
+        </div>
+
+        <div class="boss-card" data-boss="monkeys">
+            <img src="assets/img/monkeys.png">
+            <h3>Folding Screen Monkeys</h3>
+        </div>
+
+        <div class="boss-card" data-boss="ape">
+            <img src="assets/img/ape.png">
+            <h3>Guardian Ape</h3>
+        </div>
+
+        <div class="boss-card" data-boss="ape2">
+            <img src="assets/img/headless-ape.png">
+            <h3>Headless Ape</h3>
+        </div>
+
+        <div class="boss-card" data-boss="monk">
+            <img src="assets/img/monk.png">
+            <h3>Corrupted Monk</h3>
+        </div>
+
+        <div class="boss-card" data-boss="emmaIsshin">
+            <img src="assets/img/emma.png">
+            <h3>Emma & Isshin Ashina</h3>
+        </div>
+
+        <div class="boss-card" data-boss="owl">
+            <img src="assets/img/owl.png">
+            <h3>Great Shinobi Owl</h3>
+        </div>
+
+        <div class="boss-card" data-boss="trueMonk">
+            <img src="assets/img/true-monk.png">
+            <h3>True Corrupted Monk</h3>
+        </div>
+
+        <div class="boss-card" data-boss="dragon">
+            <img src="assets/img/dragon.png">
+            <h3>Divine Dragon</h3>
+        </div>
+
+        <div class="boss-card" data-boss="owlFather">
+            <img src="assets/img/owl-father.png">
+            <h3>Owl (Father)</h3>
+        </div>
+
+        <div class="boss-card" data-boss="demon">
+            <img src="assets/img/demon.png">
+            <h3>Demon of Hatred</h3>
+        </div>
+
+        <div class="boss-card" data-boss="isshinSword">
+            <img src="assets/img/isshin.png">
+            <h3>Isshin, the Sword Saint</h3>
+        </div>
+
+    </div>
+
+    <div class="modal" id="modal">
+        <div class="modal-content">
+
+            <h2 id="bossNome"></h2>
+            <img id="bossImg">
+
+            <p><strong>📍 Local:</strong> <span id="bossLocal"></span></p>
+            <p><strong>🎁 Drops:</strong> <span id="bossDrop"></span></p>
+            <p><strong>🏆 Conquista:</strong> <span id="bossConquista"></span></p>
+
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById("modal")
+
+        const bossNome = document.getElementById("bossNome")
+        const bossImg = document.getElementById("bossImg")
+        const bossLocal = document.getElementById("bossLocal")
+        const bossDrop = document.getElementById("bossDrop")
+        const bossConquista = document.getElementById("bossConquista")
+
+        const bosses = {
+            gyoubu: {
+                nome: "Gyoubu Masataka Oniwa",
+                local: "Castelo Ashina - Portão",
+                drop: "Memória: Gyoubu",
+                conquista: "Gyoubu Masataka Oniwa"
+            },
+
+            butterfly: {
+                nome: "Lady Butterfly",
+                local: "Propriedade Hirata",
+                drop: "Memória: Lady Butterfly",
+                conquista: "Senhora Borboleta Fantasma"
+            },
+
+            genichiro: {
+                nome: "Genichiro Ashina",
+                local: "Castelo Ashina (Topo)",
+                drop: "Memória: Genichiro",
+                conquista: "Genichiro Ashina"
+            },
+
+            monkeys: {
+                nome: "Macacos do Biombo",
+                local: "Templo Senpou",
+                drop: "Arte Mortal",
+                conquista: "Macacos do biombo"
+            },
+
+            ape: {
+                nome: "Guardião Primata",
+                local: "Vale Submerso",
+                drop: "Memória: Macaco Guardião",
+                conquista: "Guardião Primata"
+            },
+
+            ape2: {
+                nome: "Guardião Primata (Imortal)",
+                local: "Profundezas de Ashina",
+                drop: "Conta de Oração",
+                conquista: "Imortalidade do Guardião Primata rompida"
+            },
+
+            owl: {
+                nome: "Great Shinobi Owl",
+                local: "Castelo Ashina",
+                drop: "Memória: Coruja",
+                conquista: "Grande Shinobi, Coruja"
+            },
+
+            owlFather: {
+                nome: "Owl (Father)",
+                local: "Propriedade Hirata (memória)",
+                drop: "Memória: Coruja (Pai)",
+                conquista: "Pai superado"
+            },
+
+            monk: {
+                nome: "Monja Corrompida",
+                local: "Vila Mibu",
+                drop: "Memória: Monja",
+                conquista: "Monja Corrompida"
+            },
+
+            dragon: {
+                nome: "Dragão Divino",
+                local: "Palácio da Fonte",
+                drop: "Lágrimas do Dragão",
+                conquista: "Dádiva das lágrimas"
+            },
+
+            demon: {
+                nome: "Demônio do Rancor",
+                local: "Arredores de Ashina",
+                drop: "Memória: Demônio",
+                conquista: "Demônio do Rancor"
+            },
+
+            isshinSword: {
+                nome: "Isshin, o Santo da Espada",
+                local: "Final Verdadeiro",
+                drop: "Memória: Isshin",
+                conquista: "Isshin Ashina, Divindade da Espada"
+            },
+
+            isshinShura: {
+                nome: "Isshin Ashina",
+                local: "Final Shura",
+                drop: "Memória: Isshin",
+                conquista: "Isshin Ashina"
+            },
+            trueMonk: {
+                nome: "True Corrupted Monk",
+                local: "Palácio da Fonte",
+                drop: "Memória: Monja Verdadeira",
+                conquista: "Monja Corrompida (Verdadeira)"
+            },
+
+            emmaIsshin: {
+                nome: "Emma & Isshin Ashina",
+                local: "Castelo Ashina (Final Shura)",
+                drop: "Memória: Isshin",
+                conquista: "Shura"
+            }
+        }
+
+
+        const cards = document.querySelectorAll(".boss-card")
+
+        for (let i = 0; i < cards.length; i++) {
+            let cardAtual = cards[i]
+
+            cardAtual.addEventListener("click", function () {
+                const nome = cardAtual.dataset.boss
+                const boss = bosses[nome]
+    
+                bossNome.innerText = boss.nome
+                bossLocal.innerText = boss.local
+                bossDrop.innerText = boss.drop
+                bossConquista.innerText = boss.conquista
+    
+    
+                modal.style.display = "flex"
+            });
+        }
+
+        window.onclick = (e) => {
+            if (e.target === modal) {
+                modal.style.display = "none"
+            }
+        };
+
+    </script>
+</body>
+
+</html>

@@ -49,7 +49,7 @@ body {
 }
 
 .banner {
-    background-image: url(../../assets/img/sekiro.png);
+    background-image: url(../assets/img/sekiro.png);
     background-position: center;
     height: 1080px;
     display: flex;
@@ -76,7 +76,7 @@ body {
 }
 
 .banner2 {
-    background-image: url(../../assets/img/sekiro-painel.png);
+    background-image: url(../assets/img/sekiro-painel.png);
     background-position: center;
     display: flex;
     flex-direction: row;
@@ -101,7 +101,7 @@ body {
 }
 
 .banner3 {
-    background-image: url(../../assets/img/sekiro-banner3.png);
+    background-image: url(../assets/img/sekiro-banner3.png);
     background-position: center;
     height: 1080px;
     display: flex;
@@ -148,28 +148,28 @@ body {
 #mapa {
     background:
         linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-        url(../../assets/img/imagem-funcionalidade3-removebg-preview.png);
+        url(../assets/img/imagem-funcionalidade3-removebg-preview.png);
     background-size: cover;
 }
 
 #boss {
     background:
         linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-        url(../../assets/img/imagem-funcionalidade1-removebg-preview.png);
+        url(../assets/img/imagem-funcionalidade1-removebg-preview.png);
     background-size: cover;
 }
 
 #conquista {
     background:
         linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-        url(../../assets/img/imagem-funcionalidade2-removebg-preview.png);
+        url(../assets/img/imagem-funcionalidade2-removebg-preview.png);
     background-size: cover;
 }
 
 #dash {
     background:
         linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-        url(../../assets/img/imagem-funcionalidade4-removebg-preview.png);
+        url(../assets/img/imagem-funcionalidade4-removebg-preview.png);
     background-size: cover;
 }
 
