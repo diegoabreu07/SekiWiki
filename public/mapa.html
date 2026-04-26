@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SekiWiki | Mapa</title>
+    <link rel="stylesheet" href="styles/mapa.css">
+</head>
+
+<body>
+    <div class="header">
+        <div class="container">
+            <h1 class="titulo">SekiWiki</h1>
+            <ul class="navbar">
+                <li><a href="indexCadastrado.html">Home</a></li>
+                <li class="atual"><a href="#">Mapa</a></li>
+                <li><a href="bosses.html">Bosses</a></li>
+                <li><a href="conquista.html">Conquistas</a></li>
+            </ul>
+            <div class="usuario">
+                <img src="assets/img/usuario-index.png" alt="">
+            </div>
+        </div>
+    </div>
+
+    <h1 class="titulo">Localizações</h1>
+
+    <div class="loc-grid">
+
+        <div class="loc-card" data-loc="reservatorio_ashina">
+            <img src="assets/img/ashina-reservoir.png">
+            <h3>Reservatório Ashina</h3>
+            <p>Ponto inicial do jogo, onde Sekiro tenta resgatar Kuro.</p>
+        </div>
+
+        <div class="loc-card" data-loc="templo_dilapidado">
+            <img src="assets/img/dilapidated-temple.png">
+            <h3>Templo Dilapidado</h3>
+            <p>Um templo budista em ruínas que serve como refúgio seguro para o Escultor, Sekiro e outros que vagam pela
+                região.</p>
+        </div>
+
+        <div class="loc-card" data-loc="arredores_ashina">
+            <img src="assets/img/ashina-outskirts.png">
+            <h3>Arredores de Ashina</h3>
+            <p>Os arredores do Castelo Ashina são protegidos por inimigos poderosos e seu líder Gyoubu. Uma serpente
+                gigante também percorre o vale próximo.</p>
+        </div>
+
+        <div class="loc-card" data-loc="propriedade_hirata">
+            <img src="assets/img/hirata.png">
+            <h3>Propriedade Hirata</h3>
+            <p>É o ano do Dragon Spring, e ladrões atacam a propriedade Hirata enquanto seus guerreiros estão ausentes.
+                Proteja seu mestre a todo custo.</p>
+        </div>
+
+        <div class="loc-card" data-loc="castelo_ashina">
+            <img src="assets/img/ashina-castle.png">
+            <h3>Castelo Ashina</h3>
+            <p>O Castelo Ashina é fortemente protegido por samurais habilidosos e tropas Tengu agressivas, que defendem
+                o domínio de Genichiro Ashina.</p>
+        </div>
+
+        <div class="loc-card" data-loc="abandoned_dungeon">
+            <img src="assets/img/dungeon.png">
+            <h3>Masmorra Abandonada</h3>
+            <p>As cavernas escuras e inundadas da Masmorra Abandonada escondem as técnicas cirúrgicas proibidas do clã
+                Ashina e invocam espíritos aterrorizantes.</p>
+        </div>
+
+        <div class="loc-card" data-loc="templo_senpou">
+            <img src="assets/img/senpou.png">
+            <h3>Templo Senpou</h3>
+            <p>Os monges do Templo Senpou abandonaram o caminho da iluminação e profanaram os salões de Buda,
+                corrompidos pela busca da imortalidade e das Águas Rejuvenescedoras.</p>
+        </div>
+
+        <div class="loc-card" data-loc="vale_submerso">
+            <img src="assets/img/valley.png">
+            <h3>Vale Submerso</h3>
+            <p>Os penhascos ao redor do Castelo Ashina são protegidos por atiradores experientes e implacáveis, embora
+                não sejam tão perigosos quanto aparentam.</p>
+        </div>
+
+        <div class="loc-card" data-loc="valley_passage">
+            <img src="assets/img/valley-passage.png">
+            <h3>Passagem do Vale</h3>
+            <p>O Vale do Bodhisattva entra em decadência à medida que águas estagnadas corrompem lentamente suas raízes,
+                e a vida selvagem local se adapta ao novo ambiente hostil.</p>
+        </div>
+
+        <div class="loc-card" data-loc="ashina_depths">
+            <img src="assets/img/depths.png">
+            <h3>Profundezas de Ashina</h3>
+            <p>O veneno que flui das Profundezas de Ashina está por trás da corrosão de todo o vale e é protegido por
+                temíveis macacos gigantes.</p>
+        </div>
+
+        <div class="loc-card" data-loc="vila_mibu">
+            <img src="assets/img/mibu.png">
+            <h3>Vila Mibu</h3>
+            <p>Nas profundezas de Ashina, aldeões imortais cultivam plantações invisíveis, presos em sua existência
+                eterna e corrompida.</p>
+        </div>
+
+        <div class="loc-card" data-loc="palacio_fonte">
+            <img src="assets/img/fountain.png">
+            <h3>Palácio da Fonte</h3>
+            <p>Através do belo Palácio Celestial fluem as águas da vida. Mas, apesar das aparências, sua essência
+                corrompe os mortais que entram em contato com ela.</p>
+        </div>
+
+    </div>
+    <div class="modal" id="modal">
+        <div class="modal-content">
+
+            <h2 id="localNome"></h2>
+
+            <section>
+                <h3>Bosses</h3>
+                <ul id="listaBosses"></ul>
+            </section>
+
+            <section>
+                <h3>Consumíveis</h3>
+                <ul id="listaConsumiveis"></ul>
+            </section>
+
+            <section>
+                <h3>Equipamentos</h3>
+                <ul id="listaEquipamentos"></ul>
+            </section>
+
+            <section>
+                <h3>Importantes</h3>
+                <ul id="listaImportantes"></ul>
+            </section>
+
+        </div>
+    </div>
+
+    <div class="mapa-container">
+        <h1>Mapa do Mundo</h1>
+        <img src="assets/img/mapa-sekiro.png" alt="">
+    </div>
+    <script>
+        const locais = {
+
+            reservatorio_ashina: {
+                nome: "Reservatório Ashina",
+                bosses: [
+                    "Genichiro Ashina",
+                    "Líder Shigenori Yamauchi"
+                ],
+                itens: {
+                    consumiveis: [
+                        "3x Pellet",
+                        "2x Punhado de Cinzas"
+                    ],
+                    equipamentos: [
+                        "Kusabimaru",
+                        "Cabaça Curativa"
+                    ],
+                    importantes: [
+                        "Carta Ornamental"
+                    ]
+                }
+            },
+
+            templo_dilapidado: {
+                nome: "Templo Dilapidado",
+                bosses: [],
+                itens: {
+                    consumiveis: [
+                        "2x Pellet",
+                        "1x Bolsa de Moedas Leve",
+                        "1x Dente Oculto"
+                    ],
+                    equipamentos: [
+                        "1x Prótese Shinobi"
+                    ],
+                    importantes: [
+                        "1x Sino do Pai"
+                    ]
+                }
+            },
+
+            arredores_ashina: {
+                nome: "Arredores de Ashina",
+                bosses: [
+                    "Sem-Cabeça",
+                    "Ogro Acorrentado",
+                    "Demônio do Rancor",
+                    "Grande Serpente",
+                    "Gyoubu Oniwa"
+                ],
+                itens: {
+                    consumiveis: [
+                        "9x Pellet",
+                        "5x Semente Estalo",
+                        "2x Açúcar de Ako",
+                        "6x Fragmento de Cerâmica",
+                        "5x Emblema Espiritual",
+                        "4x Açúcar de Ungo",
+                        "3x Açúcar de Gachiin",
+                        "8x Punhado de Cinzas",
+                        "4x Bolsa de Moedas Leve",
+                        "3x Balão Mibu de Riqueza",
+                        "3x Balão Mibu de Possessão",
+                        "1x Grama Divina"
+                    ],
+                    equipamentos: [
+                        "1x Ferro Velho",
+                        "2x Semente de Cabaça",
+                        "3x Contas de Oração",
+                        "1x Roda Shuriken",
+                        "1x Pólvora Negra",
+                        "1x Barril Mecânico"
+                    ],
+                    importantes: [
+                        "1x Memória: Gyoubu Oniwa",
+                        "1x Sino do Jovem Lorde"
+                    ]
+                }
+            },
+
+            propriedade_hirata: {
+                nome: "Propriedade Hirata",
+                bosses: [
+                    "Juzou, o Bêbado",
+                    "Caçador Shinobi Enshin",
+                    "Lady Butterfly",
+                    "Coruja (Pai)"
+                ],
+                itens: {
+                    consumiveis: [
+                        "4x Óleo",
+                        "8x Pellet",
+                        "5x Fragmento de Cerâmica",
+                        "5x Pó de Molhar",
+                        "2x Pó Antídoto",
+                        "6x Emblema Espiritual",
+                        "3x Confete Divino",
+                        "6x Punhado de Cinzas",
+                        "6x Açúcar de Ungo"
+                    ],
+                    equipamentos: [
+                        "1x Barril de Chamas",
+                        "1x Machado Shinobi",
+                        "1x Penas do Corvo"
+                    ],
+                    importantes: [
+                        "3x Contas de Oração",
+                        "1x Saquê Bruto",
+                        "1x Chave do Templo"
+                    ]
+                }
+            },
+
+            castelo_ashina: {
+                nome: "Castelo Ashina",
+                bosses: [
+                    "Touro em Chamas",
+                    "Genichiro Ashina",
+                    "Elite Ashina"
+                ],
+                itens: {
+                    consumiveis: [
+                        "7x Pellet",
+                        "10x Fígado de Enguia",
+                        "2x Açúcar de Ako",
+                        "2x Açúcar de Ungo",
+                        "7x Punhado de Cinzas",
+                        "7x Fragmento de Cerâmica",
+                        "4x Emblema Espiritual"
+                    ],
+                    equipamentos: [
+                        "7x Ferro Velho",
+                        "2x Semente de Cabaça",
+                        "4x Contas de Oração",
+                        "4x Magnetita",
+                        "1x Sabimaru"
+                    ],
+                    importantes: [
+                        "1x Carta de Isshin",
+                        "1x Memória: Genichiro",
+                        "1x Chave da Passagem Secreta"
+                    ]
+                }
+            },
+
+            masmorra_abandonada: {
+                nome: "Masmorra Abandonada",
+                bosses: [
+                    "Guerreiro Shichimen"
+                ],
+                itens: {
+                    consumiveis: [
+                        "1x Óleo",
+                        "2x Açúcar de Ako",
+                        "6x Agente Calmante",
+                        "1x Emblema Espiritual"
+                    ],
+                    equipamentos: [
+                        "1x Ferro Velho",
+                        "1x Magnetita",
+                        "2x Pólvora Negra"
+                    ],
+                    importantes: [
+                        "1x Carta do Prisioneiro",
+                        "1x Carta Ensanguentada"
+                    ]
+                }
+            },
+
+            templo_senpou: {
+                nome: "Templo Senpou",
+                bosses: [
+                    "Guerreiro Shichimen"
+                ],
+                itens: {
+                    consumiveis: [
+                        "6x Agente Calmante",
+                        "2x Açúcar de Ako"
+                    ],
+                    equipamentos: [
+                        "1x Ferro Velho",
+                        "1x Magnetita"
+                    ],
+                    importantes: [
+                        "1x Texto Esotérico Senpou"
+                    ]
+                }
+            },
+
+            vale_submerso: {
+                nome: "Vale Submerso",
+                bosses: [
+                    "Guerreiro Blindado",
+                    "Centopeia Sen-Un"
+                ],
+                itens: {
+                    consumiveis: [
+                        "6x Pellet",
+                        "3x Açúcar de Ako",
+                        "4x Açúcar de Ungo",
+                        "4x Punhado de Cinzas",
+                        "19x Emblema Espiritual"
+                    ],
+                    equipamentos: [
+                        "2x Ferro Velho",
+                        "1x Semente de Cabaça",
+                        "2x Contas de Oração"
+                    ],
+                    importantes: [
+                        "1x Texto Esotérico Senpou"
+                    ]
+                }
+            },
+
+            vale_passagem: {
+                nome: "Passagem do Vale",
+                bosses: [
+                    "Snake Eyes Shirafuji",
+                    "Centopeia Girafa"
+                ],
+                itens: {
+                    consumiveis: [
+                        "2x Pellet",
+                        "3x Fígado de Enguia",
+                        "3x Semente Estalo"
+                    ],
+                    equipamentos: [
+                        "1x Leque Grande",
+                        "1x Semente de Cabaça"
+                    ],
+                    importantes: []
+                }
+            },
+
+            profundezas_ashina: {
+                nome: "Profundezas de Ashina",
+                bosses: [
+                    "Guardião Primata",
+                    "Grande Serpente"
+                ],
+                itens: {
+                    consumiveis: [
+                        "2x Pellet",
+                        "4x Semente Estalo",
+                        "7x Emblema Espiritual"
+                    ],
+                    equipamentos: [
+                        "3x Ferro Velho",
+                        "2x Magnetita"
+                    ],
+                    importantes: [
+                        "1x Lótus do Palácio"
+                    ]
+                }
+            },
+
+            vila_mibu: {
+                nome: "Vila Mibu",
+                bosses: [
+                    "Nobre da Névoa",
+                    "Macaco Sem Cabeça"
+                ],
+                itens: {
+                    consumiveis: [
+                        "9x Pellet",
+                        "5x Óleo",
+                        "3x Emblema Espiritual"
+                    ],
+                    equipamentos: [
+                        "5x Ferro Velho",
+                        "4x Contas de Oração"
+                    ],
+                    importantes: [
+                        "1x Memória: Macaco Sem Cabeça"
+                    ]
+                }
+            },
+
+            palacio_fonte: {
+                nome: "Palácio da Fonte",
+                bosses: [
+                    "Dragão Divino",
+                    "Carpa Colorida"
+                ],
+                itens: {
+                    consumiveis: [
+                        "7x Pellet",
+                        "6x Confete Divino",
+                        "3x Punhado de Cinzas"
+                    ],
+                    equipamentos: [
+                        "3x Contas de Oração",
+                        "2x Magnetita"
+                    ],
+                    importantes: [
+                        "1x Lágrimas do Dragão",
+                        "1x Memória: Dragão Divino"
+                    ]
+                }
+            }
+
+        }
+        const modal = document.getElementById("modal");
+
+        const nomeLocal = document.getElementById("localNome");
+        const listaBosses = document.getElementById("listaBosses");
+        const listaConsumiveis = document.getElementById("listaConsumiveis");
+        const listaEquipamentos = document.getElementById("listaEquipamentos");
+        const listaImportantes = document.getElementById("listaImportantes");
+
+        const cards = document.querySelectorAll(".loc-card");
+
+        for (let i = 0; i < cards.length; i++) {
+
+            cards[i].addEventListener("click", function () {
+
+                const id = cards[i].dataset.loc;
+                const local = locais[id];
+
+                nomeLocal.innerText = local.nome;
+
+                listaBosses.innerHTML = "";
+                listaConsumiveis.innerHTML = "";
+                listaEquipamentos.innerHTML = "";
+                listaImportantes.innerHTML = "";
+
+                for (let j = 0; j < local.bosses.length; j++) {
+                    listaBosses.innerHTML += `<li><label><input type="checkbox"><span>${local.bosses[j]}</span></label></li>`;
+                }
+
+                for (let j = 0; j < local.itens.consumiveis.length; j++) {
+                    listaConsumiveis.innerHTML += `<li><label><input type="checkbox"><span>${local.itens.consumiveis[j]}</span></label></li>`;
+                }
+
+                for (let j = 0; j < local.itens.equipamentos.length; j++) {
+                    listaEquipamentos.innerHTML += `<li><label><input type="checkbox"><span>${local.itens.equipamentos[j]}</span></label></li>`;
+                }
+
+                for (let j = 0; j < local.itens.importantes.length; j++) {
+                    listaImportantes.innerHTML += `<li><label><input type="checkbox"><span>${local.itens.importantes[j]}</span></label></li>`;
+                }
+
+                modal.style.display = "flex";
+            });
+        }
+
+        window.onclick = function (e) {
+            if (e.target === modal) {
+                modal.style.display = "none";
+            }
+        };
+    </script>
+</body>
+
+</html>

@@ -106,9 +106,11 @@
             <h2 id="bossNome"></h2>
             <img id="bossImg">
 
-            <p><strong>📍 Local:</strong> <span id="bossLocal"></span></p>
-            <p><strong>🎁 Drops:</strong> <span id="bossDrop"></span></p>
-            <p><strong>🏆 Conquista:</strong> <span id="bossConquista"></span></p>
+            <p><strong></strong> <span id="bossDescricao"></span></p>
+            <p><strong>Local:</strong> <span id="bossLocal"></span></p>
+            <p><strong>Drops:</strong> <span id="bossDrop"></span></p>
+            <p><strong>Conquista:</strong> <span id="bossConquista"></span></p>
+            
 
         </div>
     </div>
@@ -121,113 +123,146 @@
         const bossLocal = document.getElementById("bossLocal")
         const bossDrop = document.getElementById("bossDrop")
         const bossConquista = document.getElementById("bossConquista")
+        const bossDescricao = document.getElementById("bossDescricao")
 
         const bosses = {
+
             gyoubu: {
                 nome: "Gyoubu Masataka Oniwa",
+                img: "assets/img/gyoubu.png",
                 local: "Castelo Ashina - Portão",
                 drop: "Memória: Gyoubu",
-                conquista: "Gyoubu Masataka Oniwa"
+                conquista: "Gyoubu Masataka Oniwa",
+                descricao: "Um general feroz que protege os portões de Ashina montado em seu cavalo. Usa ataques rápidos e grande alcance com sua lança."
             },
 
             butterfly: {
                 nome: "Lady Butterfly",
+                img: "assets/img/butterfly.png",
                 local: "Propriedade Hirata",
                 drop: "Memória: Lady Butterfly",
-                conquista: "Senhora Borboleta Fantasma"
+                conquista: "Senhora Borboleta Fantasma",
+                descricao: "Uma kunoichi veterana que utiliza ilusões e agilidade para confundir seus inimigos em combate."
             },
 
             genichiro: {
                 nome: "Genichiro Ashina",
+                img: "assets/img/genichiro.png",
                 local: "Castelo Ashina (Topo)",
                 drop: "Memória: Genichiro",
-                conquista: "Genichiro Ashina"
+                conquista: "Genichiro Ashina",
+                descricao: "Herdeiro de Ashina, determinado a salvar seu clã a qualquer custo. Domina arco e espada com extrema habilidade."
             },
 
             monkeys: {
                 nome: "Macacos do Biombo",
+                img: "assets/img/monkeys.png",
                 local: "Templo Senpou",
                 drop: "Arte Mortal",
-                conquista: "Macacos do biombo"
+                conquista: "Macacos do biombo",
+                descricao: "Um desafio único onde quatro macacos invisíveis devem ser caçados usando estratégia ao invés de combate direto."
             },
 
             ape: {
                 nome: "Guardião Primata",
+                img: "assets/img/ape.png",
                 local: "Vale Submerso",
                 drop: "Memória: Macaco Guardião",
-                conquista: "Guardião Primata"
+                conquista: "Guardião Primata",
+                descricao: "Uma criatura brutal e imprevisível que luta de forma selvagem e pode surpreender até após ser derrotada."
             },
 
             ape2: {
-                nome: "Guardião Primata (Imortal)",
+                nome: "Headless Ape",
+                img: "assets/img/headless-ape.png",
                 local: "Profundezas de Ashina",
                 drop: "Conta de Oração",
-                conquista: "Imortalidade do Guardião Primata rompida"
-            },
-
-            owl: {
-                nome: "Great Shinobi Owl",
-                local: "Castelo Ashina",
-                drop: "Memória: Coruja",
-                conquista: "Grande Shinobi, Coruja"
-            },
-
-            owlFather: {
-                nome: "Owl (Father)",
-                local: "Propriedade Hirata (memória)",
-                drop: "Memória: Coruja (Pai)",
-                conquista: "Pai superado"
+                conquista: "Imortalidade do Guardião Primata rompida",
+                descricao: "Versão imortal do macaco guardião, agora ainda mais perigoso e acompanhado por outro inimigo."
             },
 
             monk: {
                 nome: "Monja Corrompida",
+                img: "assets/img/monk.png",
                 local: "Vila Mibu",
                 drop: "Memória: Monja",
-                conquista: "Monja Corrompida"
+                conquista: "Monja Corrompida",
+                descricao: "Uma entidade ilusória que guarda a entrada da vila, atacando com movimentos elegantes e longos."
             },
 
-            dragon: {
-                nome: "Dragão Divino",
-                local: "Palácio da Fonte",
-                drop: "Lágrimas do Dragão",
-                conquista: "Dádiva das lágrimas"
-            },
-
-            demon: {
-                nome: "Demônio do Rancor",
-                local: "Arredores de Ashina",
-                drop: "Memória: Demônio",
-                conquista: "Demônio do Rancor"
-            },
-
-            isshinSword: {
-                nome: "Isshin, o Santo da Espada",
-                local: "Final Verdadeiro",
-                drop: "Memória: Isshin",
-                conquista: "Isshin Ashina, Divindade da Espada"
-            },
-
-            isshinShura: {
-                nome: "Isshin Ashina",
-                local: "Final Shura",
-                drop: "Memória: Isshin",
-                conquista: "Isshin Ashina"
-            },
             trueMonk: {
-                nome: "True Corrupted Monk",
+                nome: "Monja Corrompida (Verdadeira)",
+                img: "assets/img/true-monk.png",
                 local: "Palácio da Fonte",
                 drop: "Memória: Monja Verdadeira",
-                conquista: "Monja Corrompida (Verdadeira)"
+                conquista: "Monja Corrompida (Verdadeira)",
+                descricao: "A verdadeira forma da monja, muito mais poderosa, com múltiplas fases e ataques devastadores."
+            },
+
+            owl: {
+                nome: "Grande Shinobi Coruja",
+                img: "assets/img/owl.png",
+                local: "Castelo Ashina",
+                drop: "Memória: Coruja",
+                conquista: "Grande Shinobi, Coruja",
+                descricao: "O mestre de Sekiro, um shinobi extremamente experiente que utiliza truques sujos e estratégias letais."
+            },
+
+            owlFather: {
+                nome: "Coruja (Pai)",
+                img: "assets/img/owl-father.png",
+                local: "Propriedade Hirata (Memória)",
+                drop: "Memória: Coruja (Pai)",
+                conquista: "Pai superado",
+                descricao: "Versão mais jovem e ainda mais perigosa do Coruja, com ataques rápidos e agressivos."
             },
 
             emmaIsshin: {
                 nome: "Emma & Isshin Ashina",
+                img: "assets/img/emma.png",
                 local: "Castelo Ashina (Final Shura)",
                 drop: "Memória: Isshin",
-                conquista: "Shura"
-            }
-        }
+                conquista: "Shura",
+                descricao: "Emma tenta impedir Sekiro, seguida por Isshin em sua forma mais letal no caminho do final Shura."
+            },
 
+            dragon: {
+                nome: "Dragão Divino",
+                img: "assets/img/dragon.png",
+                local: "Palácio da Fonte",
+                drop: "Lágrimas do Dragão",
+                conquista: "Dádiva das lágrimas",
+                descricao: "Uma entidade divina gigantesca. A batalha é mais simbólica e depende de mecânicas únicas."
+            },
+
+            demon: {
+                nome: "Demônio do Rancor",
+                img: "assets/img/demon.png",
+                local: "Arredores de Ashina",
+                drop: "Memória: Demônio",
+                conquista: "Demônio do Rancor",
+                descricao: "Uma criatura monstruosa consumida pelo ódio, com ataques massivos de fogo e área."
+            },
+
+            isshinSword: {
+                nome: "Isshin, o Santo da Espada",
+                img: "assets/img/isshin.png",
+                local: "Final Verdadeiro",
+                drop: "Memória: Isshin",
+                conquista: "Isshin Ashina, Divindade da Espada",
+                descricao: "O desafio final. Um guerreiro lendário com múltiplas fases, dominando espada, lança e arma de fogo."
+            },
+
+            isshinShura: {
+                nome: "Isshin Ashina",
+                img: "assets/img/isshin.png",
+                local: "Final Shura",
+                drop: "Memória: Isshin",
+                conquista: "Isshin Ashina",
+                descricao: "Versão mais velha de Isshin, ainda extremamente perigoso mesmo debilitado."
+            }
+
+        }
 
         const cards = document.querySelectorAll(".boss-card")
 
@@ -237,13 +272,16 @@
             cardAtual.addEventListener("click", function () {
                 const nome = cardAtual.dataset.boss
                 const boss = bosses[nome]
-    
+
+                bossImg.src = boss.img
                 bossNome.innerText = boss.nome
                 bossLocal.innerText = boss.local
                 bossDrop.innerText = boss.drop
                 bossConquista.innerText = boss.conquista
-    
-    
+                bossConquista.innerText = boss.conquista
+                bossDescricao.innerText = boss.descricao
+
+
                 modal.style.display = "flex"
             });
         }
