@@ -214,5 +214,51 @@
         </div>
     </div>
 </body>
+<script>
+    const checks = document.querySelectorAll("input[type='checkbox']");
+
+    for (let i = 0; i < checks.length; i++) {
+        checks[i].addEventListener("change", function () {
+
+            const status = this.checked ? 1 : 0;
+            const nome = this.parentElement.querySelector("strong").innerText.trim();
+            const idUsuario = sessionStorage.ID_USUARIO;
+            let idConquista = i + 1
+
+            fetch("/conquistas/inserir", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    idUsuarioServer: idUsuario,
+                    idConquistaServer: idConquista,
+                    statusServer: status
+                })
+            });
+        });
+    }
+
+    fetch(`/conquistas/listar/${sessionStorage.ID_USUARIO}`)
+        .then(res => res.json())
+        .then(dados => {
+
+            for (let i = 0; i < checks.length; i++) {
+
+                const nome = checks[i].parentElement.querySelector("strong").innerText.trim();
+                let idConquista
+
+                for (let j = 0; j < dados.length; j++) {
+
+                    if (dados[j].nome === nome) {
+                        checks[i].checked = dados[j].status == 1;
+                    }
+
+                }
+            }
+
+        });
+
+</script>
 
 </html>
