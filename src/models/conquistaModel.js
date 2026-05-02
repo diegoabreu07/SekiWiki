@@ -21,7 +21,7 @@ function inserir(idUsuario, idConquista, status) {
 function listar(idUsuario) {
 
     var instrucaoSql = `
-        SELECT c.nome, uc.status
+        SELECT c.idConquista, uc.statusMarcado
         FROM UsuarioConquista uc
         JOIN conquista c ON c.idConquista = uc.fkConquista
         WHERE uc.fkUsuario = ${idUsuario};
