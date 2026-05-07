@@ -45,11 +45,43 @@ body {
 }
 
 .usuario {
+    position: relative;
     display: flex;
     width: 45px;
     height: 45px;
     padding-right: 40px;
+    cursor: pointer;
 }
+
+.usuario-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background-color: black;
+    border: 1px solid rgb(223, 164, 87);
+    flex-direction: column;
+    min-width: 150px;
+    z-index: 999;
+}
+
+.usuario-dropdown.ativo {
+    display: flex;
+}
+
+
+.usuario-dropdown a {
+    padding: 10px 16px;
+    color: burlywood;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.usuario-dropdown a:hover {
+    background-color: rgb(223, 164, 87);
+    color: black;
+}
+
 
 .loc-grid {
     display: grid;

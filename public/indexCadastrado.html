@@ -1,59 +1,79 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/indexCadastrado.css">
     <title>SekiWiki | Home</title>
 </head>
+
 <body>
-     <div class="header">
+    <div class="header">
         <div class="container">
             <h1 class="titulo">SekiWiki</h1>
             <ul class="navbar">
-            <li class="atual"><a href="#">Home</a></li>
-            <li><a href="mapa.html">Mapa</a></li>
-            <li><a href="bosses.html">Bosses</a></li>
-            <li><a href="conquista.html">Conquistas</a></li>
-        </ul>
-        <div class="usuario">
-            <img src="assets/img/usuario-index.png" alt="">
+                <li class="atual"><a href="#">Home</a></li>
+                <li><a href="mapa.html">Mapa</a></li>
+                <li><a href="bosses.html">Bosses</a></li>
+                <li><a href="conquista.html">Conquistas</a></li>
+            </ul>
+            <div class="usuario">
+                <img src="assets/img/usuario-index.png" alt="" id="usuarioIcon">
+                <div class="usuario-dropdown" id="usuarioDropdown">
+                    <a href="dashboard.html">Dashboard</a>
+                    <a href="index.html">Sair</a>
+                </div>
+            </div>
         </div>
-        </div>
-     </div>
+    </div>
 
     <div class="banner">
         <div class="container">
             <div class="topo">
-            <h1>Guia de Platina</h1>
-            <p>Faça todas as conquistas de Sekiro</p>
+                <h1>Guia de Platina</h1>
+                <p>Faça todas as conquistas de Sekiro</p>
             </div>
 
             <div class="cards">
-                <div class="card">
+                <div class="card" onclick="window.location.href='mapa.html'">
                     <h3>Mapa</h3>
                     <p>Veja cada região e o que possui nelas</p>
                 </div>
-                <div class="card">
+                <div class="card" onclick="window.location.href='bosses.html'">
                     <h3>Bosses</h3>
                     <p>Aprenda estratégias para vencer os chefes</p>
                 </div>
-                <div class="card">
+                <div class="card" onclick="window.location.href='conquista.html'">
                     <h3>Conquistas</h3>
                     <p>Veja todos os requisitos e conquistas</p>
                 </div>
 
             </div>
-            
+
         </div>
-    </div>    
+    </div>
     <div class="footer">
-      <div class="container">
-        <h4>Feito pelo aluno Diego Abreu | SPTech &copy; 2026 </h4>
-      </div>
+        <div class="container">
+            <h4>Feito pelo aluno Diego Abreu | SPTech &copy; 2026 </h4>
+        </div>
     </div>
 
 
 
 </body>
+
 </html>
+<script>
+    const icon = document.getElementById("usuarioIcon");
+    const dropdown = document.getElementById("usuarioDropdown");
+
+    icon.addEventListener("click", function (e) {
+        e.stopPropagation(); // impede que o clique propague para o window
+        dropdown.classList.toggle("ativo");
+    });
+
+    window.addEventListener("click", function () {
+        dropdown.classList.remove("ativo");
+    });
+</script>

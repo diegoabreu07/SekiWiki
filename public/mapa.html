@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <div class="header">
+ <div class="header">
         <div class="container">
             <h1 class="titulo">SekiWiki</h1>
             <ul class="navbar">
@@ -19,7 +19,11 @@
                 <li><a href="conquista.html">Conquistas</a></li>
             </ul>
             <div class="usuario">
-                <img src="assets/img/usuario-index.png" alt="">
+                <img src="assets/img/usuario-index.png" alt="" id="usuarioIcon">
+                <div class="usuario-dropdown" id="usuarioDropdown">
+                    <a href="dashboard.html">Dashboard</a>
+                    <a href="index.html">Sair</a>
+                </div>
             </div>
         </div>
     </div>
@@ -145,25 +149,36 @@
         <img src="assets/img/mapa-sekiro.png" alt="">
     </div>
     <script>
+        const icon = document.getElementById("usuarioIcon");
+        const dropdown = document.getElementById("usuarioDropdown");
+
+        icon.addEventListener("click", function (e) {
+            e.stopPropagation(); // impede que o clique propague para o window
+            dropdown.classList.toggle("ativo");
+        });
+
+        window.addEventListener("click", function () {
+            dropdown.classList.remove("ativo");
+        });
         const locais = {
 
             reservatorio_ashina: {
                 nome: "Reservatório Ashina",
                 bosses: [
-                    "Genichiro Ashina",
-                    "Líder Shigenori Yamauchi"
+                    { id: 1, nome: "Genichiro Ashina" },
+                    { id: 2, nome: "Líder Shigenori Yamauchi" },
                 ],
                 itens: {
                     consumiveis: [
-                        "3x Pellet",
-                        "2x Punhado de Cinzas"
+                        { id: 3, nome: "3x Pellet" },
+                        { id: 4, nome: "2x Punhado de Cinzas" },
                     ],
                     equipamentos: [
-                        "Kusabimaru",
-                        "Cabaça Curativa"
+                        { id: 5, nome: "Kusabimaru" },
+                        { id: 6, nome: "Cabaça Curativa" },
                     ],
                     importantes: [
-                        "Carta Ornamental"
+                        { id: 7, nome: "Carta Ornamental" },
                     ]
                 }
             },
@@ -173,15 +188,15 @@
                 bosses: [],
                 itens: {
                     consumiveis: [
-                        "2x Pellet",
-                        "1x Bolsa de Moedas Leve",
-                        "1x Dente Oculto"
+                        { id: 8, nome: "2x Pellet" },
+                        { id: 9, nome: "1x Bolsa de Moedas Leve" },
+                        { id: 10, nome: "1x Dente Oculto" },
                     ],
                     equipamentos: [
-                        "1x Prótese Shinobi"
+                        { id: 11, nome: "1x Prótese Shinobi" },
                     ],
                     importantes: [
-                        "1x Sino do Pai"
+                        { id: 12, nome: "1x Sino do Pai" },
                     ]
                 }
             },
@@ -189,38 +204,38 @@
             arredores_ashina: {
                 nome: "Arredores de Ashina",
                 bosses: [
-                    "Sem-Cabeça",
-                    "Ogro Acorrentado",
-                    "Demônio do Rancor",
-                    "Grande Serpente",
-                    "Gyoubu Oniwa"
+                    { id: 13, nome: "Sem-Cabeça" },
+                    { id: 14, nome: "Ogro Acorrentado" },
+                    { id: 15, nome: "Demônio do Rancor" },
+                    { id: 16, nome: "Grande Serpente" },
+                    { id: 17, nome: "Gyoubu Oniwa" },
                 ],
                 itens: {
                     consumiveis: [
-                        "9x Pellet",
-                        "5x Semente Estalo",
-                        "2x Açúcar de Ako",
-                        "6x Fragmento de Cerâmica",
-                        "5x Emblema Espiritual",
-                        "4x Açúcar de Ungo",
-                        "3x Açúcar de Gachiin",
-                        "8x Punhado de Cinzas",
-                        "4x Bolsa de Moedas Leve",
-                        "3x Balão Mibu de Riqueza",
-                        "3x Balão Mibu de Possessão",
-                        "1x Grama Divina"
+                        { id: 18, nome: "9x Pellet" },
+                        { id: 19, nome: "5x Semente Estalo" },
+                        { id: 20, nome: "2x Açúcar de Ako" },
+                        { id: 21, nome: "6x Fragmento de Cerâmica" },
+                        { id: 22, nome: "5x Emblema Espiritual" },
+                        { id: 23, nome: "4x Açúcar de Ungo" },
+                        { id: 24, nome: "3x Açúcar de Gachiin" },
+                        { id: 25, nome: "8x Punhado de Cinzas" },
+                        { id: 26, nome: "4x Bolsa de Moedas Leve" },
+                        { id: 27, nome: "3x Balão Mibu de Riqueza" },
+                        { id: 28, nome: "3x Balão Mibu de Possessão" },
+                        { id: 29, nome: "1x Grama Divina" },
                     ],
                     equipamentos: [
-                        "1x Ferro Velho",
-                        "2x Semente de Cabaça",
-                        "3x Contas de Oração",
-                        "1x Roda Shuriken",
-                        "1x Pólvora Negra",
-                        "1x Barril Mecânico"
+                        { id: 30, nome: "1x Ferro Velho" },
+                        { id: 31, nome: "2x Semente de Cabaça" },
+                        { id: 32, nome: "3x Contas de Oração" },
+                        { id: 33, nome: "1x Roda Shuriken" },
+                        { id: 34, nome: "1x Pólvora Negra" },
+                        { id: 35, nome: "1x Barril Mecânico" },
                     ],
                     importantes: [
-                        "1x Memória: Gyoubu Oniwa",
-                        "1x Sino do Jovem Lorde"
+                        { id: 36, nome: "1x Memória: Gyoubu Oniwa" },
+                        { id: 37, nome: "1x Sino do Jovem Lorde" },
                     ]
                 }
             },
@@ -228,32 +243,32 @@
             propriedade_hirata: {
                 nome: "Propriedade Hirata",
                 bosses: [
-                    "Juzou, o Bêbado",
-                    "Caçador Shinobi Enshin",
-                    "Lady Butterfly",
-                    "Coruja (Pai)"
+                    { id: 38, nome: "Juzou, o Bêbado" },
+                    { id: 39, nome: "Caçador Shinobi Enshin" },
+                    { id: 40, nome: "Lady Butterfly" },
+                    { id: 41, nome: "Coruja (Pai)" },
                 ],
                 itens: {
                     consumiveis: [
-                        "4x Óleo",
-                        "8x Pellet",
-                        "5x Fragmento de Cerâmica",
-                        "5x Pó de Molhar",
-                        "2x Pó Antídoto",
-                        "6x Emblema Espiritual",
-                        "3x Confete Divino",
-                        "6x Punhado de Cinzas",
-                        "6x Açúcar de Ungo"
+                        { id: 42, nome: "4x Óleo" },
+                        { id: 43, nome: "8x Pellet" },
+                        { id: 44, nome: "5x Fragmento de Cerâmica" },
+                        { id: 45, nome: "5x Pó de Molhar" },
+                        { id: 46, nome: "2x Pó Antídoto" },
+                        { id: 47, nome: "6x Emblema Espiritual" },
+                        { id: 48, nome: "3x Confete Divino" },
+                        { id: 49, nome: "6x Punhado de Cinzas" },
+                        { id: 50, nome: "6x Açúcar de Ungo" },
                     ],
                     equipamentos: [
-                        "1x Barril de Chamas",
-                        "1x Machado Shinobi",
-                        "1x Penas do Corvo"
+                        { id: 51, nome: "1x Barril de Chamas" },
+                        { id: 52, nome: "1x Machado Shinobi" },
+                        { id: 53, nome: "1x Penas do Corvo" },
                     ],
                     importantes: [
-                        "3x Contas de Oração",
-                        "1x Saquê Bruto",
-                        "1x Chave do Templo"
+                        { id: 54, nome: "3x Contas de Oração" },
+                        { id: 55, nome: "1x Saquê Bruto" },
+                        { id: 56, nome: "1x Chave do Templo" },
                     ]
                 }
             },
@@ -261,31 +276,31 @@
             castelo_ashina: {
                 nome: "Castelo Ashina",
                 bosses: [
-                    "Touro em Chamas",
-                    "Genichiro Ashina",
-                    "Elite Ashina"
+                    { id: 57, nome: "Touro em Chamas" },
+                    { id: 58, nome: "Genichiro Ashina" },
+                    { id: 59, nome: "Elite Ashina" },
                 ],
                 itens: {
                     consumiveis: [
-                        "7x Pellet",
-                        "10x Fígado de Enguia",
-                        "2x Açúcar de Ako",
-                        "2x Açúcar de Ungo",
-                        "7x Punhado de Cinzas",
-                        "7x Fragmento de Cerâmica",
-                        "4x Emblema Espiritual"
+                        { id: 60, nome: "7x Pellet" },
+                        { id: 61, nome: "10x Fígado de Enguia" },
+                        { id: 62, nome: "2x Açúcar de Ako" },
+                        { id: 63, nome: "2x Açúcar de Ungo" },
+                        { id: 64, nome: "7x Punhado de Cinzas" },
+                        { id: 65, nome: "7x Fragmento de Cerâmica" },
+                        { id: 66, nome: "4x Emblema Espiritual" },
                     ],
                     equipamentos: [
-                        "7x Ferro Velho",
-                        "2x Semente de Cabaça",
-                        "4x Contas de Oração",
-                        "4x Magnetita",
-                        "1x Sabimaru"
+                        { id: 67, nome: "7x Ferro Velho" },
+                        { id: 68, nome: "2x Semente de Cabaça" },
+                        { id: 69, nome: "4x Contas de Oração" },
+                        { id: 70, nome: "4x Magnetita" },
+                        { id: 71, nome: "1x Sabimaru" },
                     ],
                     importantes: [
-                        "1x Carta de Isshin",
-                        "1x Memória: Genichiro",
-                        "1x Chave da Passagem Secreta"
+                        { id: 72, nome: "1x Carta de Isshin" },
+                        { id: 73, nome: "1x Memória: Genichiro" },
+                        { id: 74, nome: "1x Chave da Passagem Secreta" },
                     ]
                 }
             },
@@ -293,23 +308,23 @@
             masmorra_abandonada: {
                 nome: "Masmorra Abandonada",
                 bosses: [
-                    "Guerreiro Shichimen"
+                    { id: 75, nome: "Guerreiro Shichimen" },
                 ],
                 itens: {
                     consumiveis: [
-                        "1x Óleo",
-                        "2x Açúcar de Ako",
-                        "6x Agente Calmante",
-                        "1x Emblema Espiritual"
+                        { id: 76, nome: "1x Óleo" },
+                        { id: 77, nome: "2x Açúcar de Ako" },
+                        { id: 78, nome: "6x Agente Calmante" },
+                        { id: 79, nome: "1x Emblema Espiritual" },
                     ],
                     equipamentos: [
-                        "1x Ferro Velho",
-                        "1x Magnetita",
-                        "2x Pólvora Negra"
+                        { id: 80, nome: "1x Ferro Velho" },
+                        { id: 81, nome: "1x Magnetita" },
+                        { id: 82, nome: "2x Pólvora Negra" },
                     ],
                     importantes: [
-                        "1x Carta do Prisioneiro",
-                        "1x Carta Ensanguentada"
+                        { id: 83, nome: "1x Carta do Prisioneiro" },
+                        { id: 84, nome: "1x Carta Ensanguentada" },
                     ]
                 }
             },
@@ -317,19 +332,19 @@
             templo_senpou: {
                 nome: "Templo Senpou",
                 bosses: [
-                    "Guerreiro Shichimen"
+                    { id: 85, nome: "Guerreiro Shichimen" },
                 ],
                 itens: {
                     consumiveis: [
-                        "6x Agente Calmante",
-                        "2x Açúcar de Ako"
+                        { id: 86, nome: "6x Agente Calmante" },
+                        { id: 87, nome: "2x Açúcar de Ako" },
                     ],
                     equipamentos: [
-                        "1x Ferro Velho",
-                        "1x Magnetita"
+                        { id: 88, nome: "1x Ferro Velho" },
+                        { id: 89, nome: "1x Magnetita" },
                     ],
                     importantes: [
-                        "1x Texto Esotérico Senpou"
+                        { id: 90, nome: "1x Texto Esotérico Senpou" },
                     ]
                 }
             },
@@ -337,24 +352,24 @@
             vale_submerso: {
                 nome: "Vale Submerso",
                 bosses: [
-                    "Guerreiro Blindado",
-                    "Centopeia Sen-Un"
+                    { id: 91, nome: "Guerreiro Blindado" },
+                    { id: 92, nome: "Centopeia Sen-Un" },
                 ],
                 itens: {
                     consumiveis: [
-                        "6x Pellet",
-                        "3x Açúcar de Ako",
-                        "4x Açúcar de Ungo",
-                        "4x Punhado de Cinzas",
-                        "19x Emblema Espiritual"
+                        { id: 93, nome: "6x Pellet" },
+                        { id: 94, nome: "3x Açúcar de Ako" },
+                        { id: 95, nome: "4x Açúcar de Ungo" },
+                        { id: 96, nome: "4x Punhado de Cinzas" },
+                        { id: 97, nome: "19x Emblema Espiritual" },
                     ],
                     equipamentos: [
-                        "2x Ferro Velho",
-                        "1x Semente de Cabaça",
-                        "2x Contas de Oração"
+                        { id: 98, nome: "2x Ferro Velho" },
+                        { id: 99, nome: "1x Semente de Cabaça" },
+                        { id: 100, nome: "2x Contas de Oração" },
                     ],
                     importantes: [
-                        "1x Texto Esotérico Senpou"
+                        { id: 101, nome: "1x Texto Esotérico Senpou" },
                     ]
                 }
             },
@@ -362,18 +377,18 @@
             vale_passagem: {
                 nome: "Passagem do Vale",
                 bosses: [
-                    "Snake Eyes Shirafuji",
-                    "Centopeia Girafa"
+                    { id: 102, nome: "Snake Eyes Shirafuji" },
+                    { id: 103, nome: "Centopeia Girafa" },
                 ],
                 itens: {
                     consumiveis: [
-                        "2x Pellet",
-                        "3x Fígado de Enguia",
-                        "3x Semente Estalo"
+                        { id: 104, nome: "2x Pellet" },
+                        { id: 105, nome: "3x Fígado de Enguia" },
+                        { id: 106, nome: "3x Semente Estalo" },
                     ],
                     equipamentos: [
-                        "1x Leque Grande",
-                        "1x Semente de Cabaça"
+                        { id: 107, nome: "1x Leque Grande" },
+                        { id: 108, nome: "1x Semente de Cabaça" },
                     ],
                     importantes: []
                 }
@@ -382,21 +397,21 @@
             profundezas_ashina: {
                 nome: "Profundezas de Ashina",
                 bosses: [
-                    "Guardião Primata",
-                    "Grande Serpente"
+                    { id: 109, nome: "Guardião Primata" },
+                    { id: 110, nome: "Grande Serpente" },
                 ],
                 itens: {
                     consumiveis: [
-                        "2x Pellet",
-                        "4x Semente Estalo",
-                        "7x Emblema Espiritual"
+                        { id: 111, nome: "2x Pellet" },
+                        { id: 112, nome: "4x Semente Estalo" },
+                        { id: 113, nome: "7x Emblema Espiritual" },
                     ],
                     equipamentos: [
-                        "3x Ferro Velho",
-                        "2x Magnetita"
+                        { id: 114, nome: "3x Ferro Velho" },
+                        { id: 115, nome: "2x Magnetita" },
                     ],
                     importantes: [
-                        "1x Lótus do Palácio"
+                        { id: 116, nome: "1x Lótus do Palácio" },
                     ]
                 }
             },
@@ -404,21 +419,21 @@
             vila_mibu: {
                 nome: "Vila Mibu",
                 bosses: [
-                    "Nobre da Névoa",
-                    "Macaco Sem Cabeça"
+                    { id: 117, nome: "Nobre da Névoa" },
+                    { id: 118, nome: "Macaco Sem Cabeça" },
                 ],
                 itens: {
                     consumiveis: [
-                        "9x Pellet",
-                        "5x Óleo",
-                        "3x Emblema Espiritual"
+                        { id: 119, nome: "9x Pellet" },
+                        { id: 120, nome: "5x Óleo" },
+                        { id: 121, nome: "3x Emblema Espiritual" },
                     ],
                     equipamentos: [
-                        "5x Ferro Velho",
-                        "4x Contas de Oração"
+                        { id: 122, nome: "5x Ferro Velho" },
+                        { id: 123, nome: "4x Contas de Oração" },
                     ],
                     importantes: [
-                        "1x Memória: Macaco Sem Cabeça"
+                        { id: 124, nome: "1x Memória: Macaco Sem Cabeça" },
                     ]
                 }
             },
@@ -426,26 +441,25 @@
             palacio_fonte: {
                 nome: "Palácio da Fonte",
                 bosses: [
-                    "Dragão Divino",
-                    "Carpa Colorida"
+                    { id: 125, nome: "Dragão Divino" },
+                    { id: 126, nome: "Carpa Colorida" },
                 ],
                 itens: {
                     consumiveis: [
-                        "7x Pellet",
-                        "6x Confete Divino",
-                        "3x Punhado de Cinzas"
+                        { id: 127, nome: "7x Pellet" },
+                        { id: 128, nome: "6x Confete Divino" },
+                        { id: 129, nome: "3x Punhado de Cinzas" },
                     ],
                     equipamentos: [
-                        "3x Contas de Oração",
-                        "2x Magnetita"
+                        { id: 130, nome: "3x Contas de Oração" },
+                        { id: 131, nome: "2x Magnetita" },
                     ],
                     importantes: [
-                        "1x Lágrimas do Dragão",
-                        "1x Memória: Dragão Divino"
+                        { id: 132, nome: "1x Lágrimas do Dragão" },
+                        { id: 133, nome: "1x Memória: Dragão Divino" },
                     ]
                 }
-            }
-
+            },
         }
         const modal = document.getElementById("modal");
 
@@ -471,24 +485,59 @@
                 listaEquipamentos.innerHTML = "";
                 listaImportantes.innerHTML = "";
 
-                for (let j = 0; j < local.bosses.length; j++) {
-                    listaBosses.innerHTML += `<li><label><input type="checkbox"><span>${local.bosses[j]}</span></label></li>`;
-                }
+                fetch(`/mapa/listar/${sessionStorage.ID_USUARIO}`)
+                    .then(res => res.json())
+                    .then(dados => {
 
-                for (let j = 0; j < local.itens.consumiveis.length; j++) {
-                    listaConsumiveis.innerHTML += `<li><label><input type="checkbox"><span>${local.itens.consumiveis[j]}</span></label></li>`;
-                }
+                        for (let j = 0; j < local.bosses.length; j++) {
+                            listaBosses.innerHTML += `<li><label><input type="checkbox" data-id="${local.bosses[j].id}"><span>${local.bosses[j].nome}</span></label></li>`;
+                        }
 
-                for (let j = 0; j < local.itens.equipamentos.length; j++) {
-                    listaEquipamentos.innerHTML += `<li><label><input type="checkbox"><span>${local.itens.equipamentos[j]}</span></label></li>`;
-                }
+                        for (let j = 0; j < local.itens.consumiveis.length; j++) {
+                            listaConsumiveis.innerHTML += `<li><label><input type="checkbox" data-id="${local.itens.consumiveis[j].id}"><span>${local.itens.consumiveis[j].nome}</span></label></li>`;
+                        }
 
-                for (let j = 0; j < local.itens.importantes.length; j++) {
-                    listaImportantes.innerHTML += `<li><label><input type="checkbox"><span>${local.itens.importantes[j]}</span></label></li>`;
-                }
+                        for (let j = 0; j < local.itens.equipamentos.length; j++) {
+                            listaEquipamentos.innerHTML += `<li><label><input type="checkbox" data-id="${local.itens.equipamentos[j].id}"><span>${local.itens.equipamentos[j].nome}</span></label></li>`;
+                        }
 
-                modal.style.display = "flex";
-            });
+                        for (let j = 0; j < local.itens.importantes.length; j++) {
+                            listaImportantes.innerHTML += `<li><label><input type="checkbox" data-id="${local.itens.importantes[j].id}"><span>${local.itens.importantes[j].nome}</span></label></li>`;
+                        }
+
+                        const checksMapa = document.querySelectorAll(".modal input[type='checkbox']");
+
+                        for (let i = 0; i < checksMapa.length; i++) {
+                            let idChecklist = checksMapa[i].dataset.id
+
+                            for (let j = 0; j < dados.length; j++) {
+                                if (dados[j].idChecklist == idChecklist) {
+                                    checksMapa[i].checked = dados[j].statusMarcadoChecklist == 1
+                                }
+                            }
+                        }
+
+                        for (let k = 0; k < checksMapa.length; k++) {
+                            checksMapa[k].addEventListener("change", function () {
+                                const idChecklist = this.dataset.id;
+                                const idUsuario = sessionStorage.ID_USUARIO;
+                                const status = this.checked ? 1 : 0;
+
+                                fetch("/mapa/inserir", {
+                                    method: "POST",
+                                    headers: { "Content-Type": "application/json" },
+                                    body: JSON.stringify({
+                                        idUsuarioServer: idUsuario,
+                                        idChecklistServer: idChecklist,
+                                        statusServer: status
+                                    })
+                                });
+                            });
+                        }
+
+                        modal.style.display = "flex";
+                    });
+            })
         }
 
         window.onclick = function (e) {

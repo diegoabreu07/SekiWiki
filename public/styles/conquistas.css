@@ -1,10 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap');
+
 body {
-  background: radial-gradient(circle at center, #1a1a1a, #000);
-  color: #e6e6e6;
-  font-family: 'Cinzel', sans-serif;
-  margin: 0;
+    background: radial-gradient(circle at center, #1a1a1a, #000);
+    color: #e6e6e6;
+    font-family: 'Cinzel', sans-serif;
+    margin: 0;
 }
+
 .header {
     background-color: black;
     justify-content: space-between;
@@ -12,49 +14,84 @@ body {
     height: 85px;
 }
 
-.header .container{
+.header .container {
     align-items: center;
     display: flex;
     justify-content: space-between;
 }
-.titulo{
+
+.titulo {
     color: rgb(223, 164, 87);
     padding-left: 40px;
     text-align: center;
 }
- .navbar {
+
+.navbar {
     display: flex;
     align-items: center;
     gap: 50px;
     color: burlywood;
     list-style: none;
     padding-right: 160px;
- }
+}
 
- .navbar li {
+.navbar li {
     color: burlywood;
- }
+}
 
- .navbar a {
+.navbar a {
     color: burlywood;
     text-decoration: none;
- }
- .atual {
-    font-weight: bold;
- }
+}
 
- .usuario {
+.atual {
+    font-weight: bold;
+}
+
+.usuario {
+    position: relative;
     display: flex;
     width: 45px;
     height: 45px;
     padding-right: 40px;
- }
+    cursor: pointer;
+}
+
+.usuario-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background-color: black;
+    border: 1px solid rgb(223, 164, 87);
+    flex-direction: column;
+    min-width: 150px;
+    z-index: 999;
+}
+
+.usuario-dropdown.ativo {
+    display: flex;
+}
+
+
+.usuario-dropdown a {
+    padding: 10px 16px;
+    color: burlywood;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.usuario-dropdown a:hover {
+    background-color: rgb(223, 164, 87);
+    color: black;
+}
+
 
 .grupos span {
     display: block;
     font-size: 13px;
     color: #aaa;
-    margin-left: 22px;  
+    margin-left: 22px;
 }
 
 .grupos strong {
@@ -69,7 +106,7 @@ body {
     margin-top: 50px;
 }
 
-.grupos > div {
+.grupos>div {
     width: 400px;
     background: rgba(0, 0, 0, 0.6);
     padding: 20px;
@@ -92,11 +129,11 @@ body {
     cursor: pointer;
 }
 
-.item input:checked + .texto strong {
+.item input:checked+.texto strong {
     text-decoration: line-through;
     color: #888;
 }
 
-.item input:checked + .texto span {
+.item input:checked+.texto span {
     color: #666;
 }

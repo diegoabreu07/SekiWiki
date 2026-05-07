@@ -19,7 +19,11 @@
                 <li><a href="conquista.html">Conquistas</a></li>
             </ul>
             <div class="usuario">
-                <img src="assets/img/usuario-index.png" alt="">
+                <img src="assets/img/usuario-index.png" alt="" id="usuarioIcon">
+                <div class="usuario-dropdown" id="usuarioDropdown">
+                    <a href="dashboard.html">Dashboard</a>
+                    <a href="index.html">Sair</a>
+                </div>
             </div>
         </div>
     </div>
@@ -110,12 +114,24 @@
             <p><strong>Local:</strong> <span id="bossLocal"></span></p>
             <p><strong>Drops:</strong> <span id="bossDrop"></span></p>
             <p><strong>Conquista:</strong> <span id="bossConquista"></span></p>
-            
+
 
         </div>
     </div>
 
     <script>
+        const icon = document.getElementById("usuarioIcon");
+        const dropdown = document.getElementById("usuarioDropdown");
+
+        icon.addEventListener("click", function (e) {
+            e.stopPropagation(); // impede que o clique propague para o window
+            dropdown.classList.toggle("ativo");
+        });
+
+        window.addEventListener("click", function () {
+            dropdown.classList.remove("ativo");
+        });
+
         const modal = document.getElementById("modal")
 
         const bossNome = document.getElementById("bossNome")

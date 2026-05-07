@@ -19,7 +19,11 @@
                 <li class="atual"><a href="#">Conquistas</a></li>
             </ul>
             <div class="usuario">
-                <img src="assets/img/usuario-index.png" alt="">
+                <img src="assets/img/usuario-index.png" alt="" id="usuarioIcon">
+                <div class="usuario-dropdown" id="usuarioDropdown">
+                    <a href="dashboard.html">Dashboard</a>
+                    <a href="index.html">Sair</a>
+                </div>
             </div>
         </div>
     </div>
@@ -215,6 +219,18 @@
     </div>
 </body>
 <script>
+    const icon = document.getElementById("usuarioIcon");
+    const dropdown = document.getElementById("usuarioDropdown");
+
+    icon.addEventListener("click", function (e) {
+        e.stopPropagation();
+        dropdown.classList.toggle("ativo");
+    });
+
+    window.addEventListener("click", function () {
+        dropdown.classList.remove("ativo");
+    });
+
     const checks = document.querySelectorAll("input[type='checkbox']");
 
     for (let i = 0; i < checks.length; i++) {

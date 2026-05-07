@@ -47,6 +47,48 @@
        font-weight: bold;
    }
 
+.painel-login {
+    position: relative;
+}
+.painel-cadastro{
+    position: relative;
+}
+
+.btn-voltar {
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    color: burlywood;
+    text-decoration: none;
+    font-size: 14px;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 5px 10px;
+    border-radius: 4px;
+    border: 1px solid burlywood;
+    
+}
+
+   .btn-voltar:hover {
+       color: rgb(223, 164, 87);
+   }
+
+   .link-auth {
+       text-align: center;
+       font-size: 15px;
+       color: #e6e6e6;
+       margin-bottom: 10px;
+   }
+
+   .link-auth a {
+       color: rgb(223, 164, 87);
+       text-decoration: none;
+   }
+
+   .link-auth a:hover {
+       text-decoration: underline;
+   }
+
    .cadastro {
        display: flex;
        flex-direction: row;
@@ -83,7 +125,7 @@
    }
 
    .formulario input {
-    font-family: 'Noto Serif', sans-serif;
+       font-family: 'Noto Serif', sans-serif;
        color: burlywood;
        background: transparent;
        border: none;

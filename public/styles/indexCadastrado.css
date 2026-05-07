@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap');
 
 body {
-  background-color: #0d0d0d;
-  color: #e6e6e6;
-  font-family: 'Cinzel', sans-serif;
-  margin: 0;
+    background-color: #0d0d0d;
+    color: #e6e6e6;
+    font-family: 'Cinzel', sans-serif;
+    margin: 0;
 }
 
 .header {
@@ -14,45 +14,79 @@ body {
     height: 85px;
 }
 
-.header .container{
+.header .container {
     align-items: center;
     display: flex;
     justify-content: space-between;
 }
-.titulo{
+
+.titulo {
     color: rgb(223, 164, 87);
     padding-left: 40px;
     text-align: center;
 }
- .navbar {
+
+.navbar {
     display: flex;
     align-items: center;
     gap: 50px;
     color: burlywood;
     list-style: none;
     padding-right: 160px;
- }
+}
 
- .navbar li {
+.navbar li {
     color: burlywood;
- }
+}
 
- .navbar a {
+.navbar a {
     color: burlywood;
     text-decoration: none;
- }
- .atual {
-    font-weight: bold;
- }
+}
 
- .usuario {
+.atual {
+    font-weight: bold;
+}
+
+.usuario {
+    position: relative;
     display: flex;
     width: 45px;
     height: 45px;
     padding-right: 40px;
- }
+    cursor: pointer;
+}
 
- .banner {
+.usuario-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background-color: black;
+    border: 1px solid rgb(223, 164, 87);
+    flex-direction: column;
+    min-width: 150px;
+    z-index: 999;
+}
+
+.usuario-dropdown.ativo {
+    display: flex;
+}
+
+
+.usuario-dropdown a {
+    padding: 10px 16px;
+    color: burlywood;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.usuario-dropdown a:hover {
+    background-color: rgb(223, 164, 87);
+    color: black;
+}
+
+.banner {
     background-image: url(../assets/img/sekiro.png);
     background-position: center;
     height: 1080px;
@@ -64,16 +98,19 @@ body {
     align-items: center;
     background-repeat: no-repeat;
     background-size: cover;
- }
- .banner .container {
-    background: rgba(0, 0, 0, 0.7); 
+}
+
+.banner .container {
+    background: rgba(0, 0, 0, 0.7);
     padding: 40px;
     border-radius: 10px;
     text-align: center;
 }
+
 .topo {
     padding-bottom: 25px;
 }
+
 .cards {
     display: flex;
     justify-content: center;
@@ -96,9 +133,9 @@ body {
     cursor: pointer;
 }
 
-.footer .container h4{
-   display: flex;
-   margin-top: 30px;
-   justify-content: center;
-   height: 25px;
- }
+.footer .container h4 {
+    display: flex;
+    margin-top: 30px;
+    justify-content: center;
+    height: 25px;
+}
