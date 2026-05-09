@@ -1,0 +1,246 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+ 
+:root {
+    --gold: rgb(223, 164, 87);
+    --gold-dark: rgb(180, 130, 60);
+    --bg: #0d0d0d;
+    --bg-card: #161616;
+    --bg-sidebar: #0a0a0a;
+    --border: rgba(223, 164, 87, 0.3);
+    --text: #e6e6e6;
+    --text-muted: #888;
+}
+ 
+body {
+    overflow: hidden;
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'Cinzel', sans-serif;
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 240px;
+    min-height: 100vh;
+    background-color: var(--bg-sidebar);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+ 
+.sidebar-logo {
+    padding: 30px 24px 20px;
+    border-bottom: 1px solid var(--border);
+}
+ 
+.sidebar-logo h1 {
+    color: var(--gold);
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 18px;
+    letter-spacing: 2px;
+}
+ 
+.sidebar-nav {
+    flex: 1;
+    padding: 20px 0;
+}
+ 
+.nav-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--text-muted);
+    padding: 10px 24px 6px;
+    text-transform: uppercase;
+}
+ 
+.nav-item {
+    display: block;
+    padding: 12px 24px;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 1px;
+    transition: all 0.2s;
+    border-left: 3px solid transparent;
+}
+ 
+.nav-item:hover {
+    color: var(--gold);
+    background-color: rgba(223, 164, 87, 0.05);
+}
+ 
+.nav-item.ativo {
+    color: var(--gold);
+    border-left-color: var(--gold);
+    background-color: rgba(223, 164, 87, 0.08);
+}
+ 
+.sidebar-footer {
+    padding: 20px 24px;
+    border-top: 1px solid var(--border);
+}
+ 
+.usuario-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+ 
+.usuario-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+    object-fit: cover;
+}
+ 
+.usuario-nome {
+    font-size: 13px;
+    color: var(--text);
+    letter-spacing: 1px;
+}
+ 
+.btn-sair {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background: transparent;
+    border: 1px solid rgba(223, 164, 87, 0.4);
+    color: var(--gold);
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+ 
+.btn-sair:hover {
+    background-color: var(--gold);
+    color: black;
+}
+ 
+.main {
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    min-width: 0;
+    margin-left: 240px;
+    flex: 1;
+    padding: 20px 24px;
+}
+ 
+.page-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 18px;
+    color: var(--gold);
+    letter-spacing: 3px;
+    margin-bottom: 4px;
+}
+ 
+.page-subtitle {
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+}
+ 
+.kpis {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 16px;
+}
+ 
+.kpi-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 16px;
+    position: relative;
+    overflow: hidden;
+}
+ 
+.kpi-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+    background-color: var(--gold);
+}
+ 
+.kpi-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+ 
+.kpi-valor {
+    font-size: 16px;
+    color: var(--gold);
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+    line-height: 1.2;
+}
+ 
+.kpi-desc {
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+}
+ 
+
+.graficos {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 12px;
+    align-items: start;
+}
+ 
+.grafico-card {
+    overflow: hidden;
+    width: 100%;
+    min-width: 0;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 12px;
+}
+ .grafico-full {
+    grid-column: 1 / -1;
+ }
+.grafico-titulo {
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+}
+ 
+.grafico-titulo span {
+    color: var(--gold);
+}
+
+.canvas-bosses {
+    max-height: 280px !important;
+}
+.canvas-conquistas {
+    max-height: 280px !important;
+}
+canvas {
+    max-height: 200px;
+}

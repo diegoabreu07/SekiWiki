@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SekiWiki | Dashboard</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cinzel+Decorative:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles/dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <h1>SekiWiki</h1>
+        </div>
+
+        <nav class="sidebar-nav">
+            <div class="nav-label">Menu</div>
+            <a href="indexCadastrado.html" class="nav-item">Home</a>
+            <a href="mapa.html" class="nav-item">Mapa</a>
+            <a href="bosses.html" class="nav-item">Bosses</a>
+            <a href="conquista.html" class="nav-item">Conquistas</a>
+
+            <div class="nav-label">Progresso</div>
+            <a href="dashboard.html" class="nav-item ativo">Dashboard</a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="usuario-info">
+                <img src="assets/img/usuario-index.png" alt="" class="usuario-avatar">
+                <span class="usuario-nome" id="nomeUsuario">Jogador</span>
+            </div>
+            <a href="index.html" class="btn-sair">Sair</a>
+        </div>
+    </aside>
+
+    <main class="main">
+        <h2 class="page-title">Dashboard</h2>
+        <p class="page-subtitle">Acompanhe seu progresso em Sekiro</p>
+
+        <div class="kpis">
+            <div class="kpi-card">
+                <div class="kpi-label">Boss Mais Temido</div>
+                <div class="kpi-valor" id="kpiBoss">—</div>
+                <div class="kpi-desc">menos derrotado entre os jogadores</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Progresso Geral</div>
+                <div class="kpi-valor" id="kpiProgresso">—</div>
+                <div class="kpi-desc">do total de itens completados</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Conquista Mais Rara</div>
+                <div class="kpi-valor" id="kpiConquista">—</div>
+                <div class="kpi-desc">menor taxa de conclusão global</div>
+            </div>
+        </div>
+
+        <div class="graficos">
+            <div class="grafico-card">
+                <div class="grafico-titulo"><span>Conquistas</span> Concluídas vs Pendentes</div>
+                <canvas id="graficoConquistas" class="canvas-conquistas"></canvas>
+            </div>
+            <div class="grafico-card">
+                <div class="grafico-titulo">Taxa de Derrota por <span>Boss</span></div>
+                <canvas id="graficoBosses" class="canvas-bosses"></canvas>
+            </div>
+            <div class="grafico-card grafico-full">
+                <div class="grafico-titulo">Você vs <span>Média Global</span> por Área</div>
+                <canvas id="graficoComparativo"></canvas>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById("nomeUsuario").innerText = sessionStorage.NOME_USUARIO || "Jogador";
+
+        const gold = "rgb(223, 164, 87)";
+        const goldTransp = "rgba(223, 164, 87, 0.15)";
+        const cinza = "rgba(150, 150, 150, 0.5)";
+        const cinzaTransp = "rgba(150, 150, 150, 0.15)";
+        const defaultFont = { family: "Cinzel, serif", size: 11 };
+
+        Chart.defaults.color = "#888";
+        Chart.defaults.font = defaultFont;
+
+        const areas = [
+            "Reservatório", "Templo Dilap.", "Arredores",
+            "Hirata", "Castelo", "Masmorra",
+            "Templo Senpou", "Vale Submerso", "Passagem",
+            "Profundezas", "Vila Mibu", "Palácio"
+        ];
+
+        const bosses = [
+            "Gyoubu Masataka Oniwa",
+            "Lady Butterfly",
+            "Genichiro Ashina",
+            "Macacos do Biombo",
+            "Guardião Primata",
+            "Guardião Primata Sem Cabeça",
+            "Monja Corrompida",
+            "Emma & Isshin Ashina",
+            "Grande Shinobi Coruja",
+            "Verdadeira Monja Corrompida",
+            "Dragão Divino",
+            "Coruja (Pai)",
+            "Demônio do Rancor",
+            "Isshin, Divindade da Espada"
+        ];
+
+        new Chart(document.getElementById("graficoBosses"), {
+            type: "bar",
+            data: {
+                labels: bosses,
+                datasets: [{
+                    label: "% Jogadores que derrotaram",
+                    data: [90, 70, 65, 80, 55, 50, 60, 35, 45, 55, 75, 40, 30, 25],
+                    backgroundColor: goldTransp,
+                    borderColor: gold,
+                    borderWidth: 1,
+                }]
+            },
+            options: {
+                indexAxis: "y",
+                layout: {
+                    padding: { left: 0 }
+                },
+                responsive: true,
+                plugins: { legend: { display: false } },
+                scales: {
+                    x: {
+                        min: 0, max: 100,
+                        grid: { color: "rgba(255,255,255,0.05)" },
+                        ticks: { callback: v => v + "%" }
+                    },
+                    y: {
+                        grid: { display: false },
+                        ticks: {
+                            font: { size: 9 },
+                            autoskip: false
+                        },
+                        afterFit: function(scale) {
+                            scale.width = 180;
+                        }
+                    }
+                }
+            }
+        });
+
+        new Chart(document.getElementById("graficoConquistas"), {
+            type: "doughnut",
+            data: {
+                labels: ["Concluídas", "Pendentes"],
+                datasets: [{
+                    data: [20, 14],
+                    backgroundColor: [gold, "rgba(255,255,255,0.08)"],
+                    borderColor: ["rgba(0,0,0,0.3)", "rgba(255,255,255,0.05)"],
+                    borderWidth: 2,
+                }]
+            },
+            options: {
+                responsive: true,
+                cutout: "70%",
+                plugins: {
+                    legend: {
+                        position: "bottom",
+                        labels: { padding: 20, font: defaultFont }
+                    }
+                }
+            }
+        });
+
+        new Chart(document.getElementById("graficoComparativo"), {
+            type: "bar",
+            data: {
+                labels: areas,
+                datasets: [
+                    {
+                        label: "Você",
+                        data: [75, 60, 55, 50, 65, 40, 70, 45, 35, 50, 55, 30],
+                        backgroundColor: goldTransp,
+                        borderColor: gold,
+                        borderWidth: 1,
+                    },
+                    {
+                        label: "Média Global",
+                        data: [100, 80, 60, 40, 70, 30, 90, 50, 20, 65, 45, 10],
+                        backgroundColor: cinzaTransp,
+                        borderColor: cinza,
+                        borderWidth: 1,
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: "bottom",
+                        labels: { padding: 20, font: defaultFont }
+                    }
+                },
+                scales: {
+                    y: {
+                        min: 0, max: 100,
+                        grid: { color: "rgba(255,255,255,0.05)" },
+                        ticks: { callback: v => v + "%" }
+                    },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+    </script>
+
+</body>
+
+</html>
