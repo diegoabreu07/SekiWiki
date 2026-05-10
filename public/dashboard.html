@@ -51,6 +51,11 @@
             </div>
             <div class="kpi-card">
                 <div class="kpi-label">Progresso Geral</div>
+                <div class="kpi-toggle">
+                    <span class="toggle-item ativo" onclick="trocarProgresso('geral')">Geral</span>
+                    <span class="toggle-item" onclick="trocarProgresso('conquistas')">Conquistas</span>
+                    <span class="toggle-item" onclick="trocarProgresso('mapa')">Mapa</span>
+                </div>
                 <div class="kpi-valor" id="kpiProgresso">—</div>
                 <div class="kpi-desc">do total de itens completados</div>
             </div>
@@ -113,7 +118,7 @@
             "Isshin, Divindade da Espada"
         ];
 
-        new Chart(document.getElementById("graficoBosses"), {
+        const graficoBosses = new Chart(document.getElementById("graficoBosses"), {
             type: "bar",
             data: {
                 labels: bosses,
@@ -144,7 +149,7 @@
                             font: { size: 9 },
                             autoskip: false
                         },
-                        afterFit: function(scale) {
+                        afterFit: function (scale) {
                             scale.width = 180;
                         }
                     }
@@ -152,7 +157,7 @@
             }
         });
 
-        new Chart(document.getElementById("graficoConquistas"), {
+        const graficoConquistas = new Chart(document.getElementById("graficoConquistas"), {
             type: "doughnut",
             data: {
                 labels: ["Concluídas", "Pendentes"],
@@ -175,7 +180,7 @@
             }
         });
 
-        new Chart(document.getElementById("graficoComparativo"), {
+        const graficoComparativo = new Chart(document.getElementById("graficoComparativo"), {
             type: "bar",
             data: {
                 labels: areas,
@@ -214,6 +219,105 @@
                 }
             }
         });
+
+        var progressoGeral = 0;
+        var progressoConquistas = 0;
+        var progressoMapa = 0;
+
+        const idUsuario = sessionStorage.ID_USUARIO;
+
+        fetch(`/dashboard/progressoGeral/${idUsuario}`)
+            .then(res => res.json())
+            .then(dados => {
+                progressoGeral = parseFloat(dados[0].concluidas).toFixed(1);
+                document.getElementById("kpiProgresso").innerText = progressoGeral + "%";
+            });
+
+        fetch(`/dashboard/progressoConquistas/${idUsuario}`)
+            .then(res => res.json())
+            .then(dados => {
+                progressoConquistas = parseFloat(dados[0].concluidas).toFixed(1);
+            });
+
+        fetch(`/dashboard/progressoMapa/${idUsuario}`)
+            .then(res => res.json())
+            .then(dados => {
+                progressoMapa = parseFloat(dados[0].concluidas).toFixed(1);
+            });
+
+        function trocarProgresso(tipo) {
+            const items = document.querySelectorAll(".toggle-item");
+            for (let i = 0; i < items.length; i++) {
+                items[i].classList.remove("ativo");
+            }
+            event.target.classList.add("ativo");
+
+            if (tipo === "geral") {
+                document.getElementById("kpiProgresso").innerText = progressoGeral + "%";
+            } else if (tipo === "conquistas") {
+                document.getElementById("kpiProgresso").innerText = progressoConquistas + "%";
+            } else {
+                document.getElementById("kpiProgresso").innerText = progressoMapa + "%";
+            }
+        }
+        fetch("/dashboard/conquistaMaisRara")
+            .then(res => res.json())
+            .then(dados => {
+                document.getElementById("kpiConquista").innerText = dados[0].nome
+            })
+
+        fetch("/dashboard/bossMaisTemido")
+            .then(res => res.json())
+            .then(dados => {
+                document.getElementById("kpiBoss").innerText = dados[0].nome
+            })
+
+        fetch(`/dashboard/conquistasConcluidas/${idUsuario}`)
+            .then(res => res.json())
+            .then(dados => {
+                let concluidas = dados[0].concluidas
+                let pendentes = 34 - concluidas
+
+                graficoConquistas.data.datasets[0].data = [concluidas, pendentes];
+                graficoConquistas.update();
+            })
+
+        fetch(`/dashboard/progressoUsuarioPorArea/${idUsuario}`)
+            .then(res => res.json())
+            .then(dados => {
+                let porcentagem = []
+                for (let i = 0; i < dados.length; i++) {
+                    porcentagem.push(dados[i].porcentagem)
+                }
+
+                graficoComparativo.data.datasets[0].data = porcentagem;
+                graficoComparativo.update();
+            })
+
+        fetch(`/dashboard/mediaGlobalPorArea`)
+            .then(res => res.json())
+            .then(dados => {
+                let porcentagem = []
+                for (let i = 0; i < dados.length; i++) {
+                    porcentagem.push(dados[i].porcentagem)
+                }
+
+                graficoComparativo.data.datasets[1].data = porcentagem;
+                graficoComparativo.update();
+            })
+
+        fetch(`/dashboard/bossesTaxaDerrota`)
+            .then(res => res.json())
+            .then(dados => {
+                let porcentagem = []
+                for (let i = 0; i < dados.length; i++) {
+                    porcentagem.push(dados[i].total)
+                }
+
+                graficoBosses.data.datasets[0].data = porcentagem;
+                graficoBosses.update();
+            })
+
     </script>
 
 </body>

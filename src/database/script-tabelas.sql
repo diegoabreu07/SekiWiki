@@ -1,62 +1,238 @@
--- Arquivo de apoio, caso você queira criar tabelas como as aqui criadas para a API funcionar.
--- Você precisa executar os comandos no banco de dados para criar as tabelas,
--- ter este arquivo aqui não significa que a tabela em seu BD estará como abaixo!
-
-/*
-comandos para mysql server
-*/
-
-CREATE DATABASE aquatech;
-
-USE aquatech;
-
-CREATE TABLE empresa (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	razao_social VARCHAR(50),
-	cnpj CHAR(14),
-	codigo_ativacao VARCHAR(50)
-);
+CREATE DATABASE Sekiwiki;
+USE Sekiwiki;
 
 CREATE TABLE usuario (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	nome VARCHAR(50),
-	email VARCHAR(50),
-	senha VARCHAR(50),
-	fk_empresa INT,
-	FOREIGN KEY (fk_empresa) REFERENCES empresa(id)
+idUsuario INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR(50),
+email VARCHAR (255),
+senha VARCHAR (255)
 );
 
-CREATE TABLE aviso (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	titulo VARCHAR(100),
-	descricao VARCHAR(150),
-	fk_usuario INT,
-	FOREIGN KEY (fk_usuario) REFERENCES usuario(id)
+CREATE TABLE conquista (
+idConquista INT AUTO_INCREMENT PRIMARY KEY,
+nome VARCHAR(100),
+descricao VARCHAR(255)
 );
 
-create table aquario (
-/* em nossa regra de negócio, um aquario tem apenas um sensor */
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	descricao VARCHAR(300),
-	fk_empresa INT,
-	FOREIGN KEY (fk_empresa) REFERENCES empresa(id)
+CREATE TABLE UsuarioConquista (
+fkUsuario INT,
+CONSTRAINT fkUsuario FOREIGN KEY (fkUsuario) REFERENCES usuario(idUsuario),
+fkConquista INT,
+CONSTRAINT fkConquista FOREIGN KEY (fkConquista) REFERENCES conquista(idConquista),
+statusMarcado TINYINT NOT NULL DEFAULT 0,
+CONSTRAINT chStatus CHECK (statusMarcado IN (0,1)),
+PRIMARY KEY (fkUsuario, fkConquista)
 );
 
-/* esta tabela deve estar de acordo com o que está em INSERT de sua API do arduino - dat-acqu-ino */
-
-create table medida (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	dht11_umidade DECIMAL,
-	dht11_temperatura DECIMAL,
-	luminosidade DECIMAL,
-	lm35_temperatura DECIMAL,
-	chave TINYINT,
-	momento DATETIME,
-	fk_aquario INT,
-	FOREIGN KEY (fk_aquario) REFERENCES aquario(id)
+CREATE TABLE Area (
+idArea INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR(100)
 );
 
-insert into empresa (razao_social, codigo_ativacao) values ('Empresa 1', 'ED145B');
-insert into empresa (razao_social, codigo_ativacao) values ('Empresa 2', 'A1B2C3');
-insert into aquario (descricao, fk_empresa) values ('Aquário de Estrela-do-mar', 1);
-insert into aquario (descricao, fk_empresa) values ('Aquário de Peixe-dourado', 2);
+CREATE TABLE Checklist (
+idChecklist INT PRIMARY KEY AUTO_INCREMENT,
+fkArea INT,
+nome VARCHAR(255),
+CONSTRAINT fkAreaChecklist FOREIGN KEY (fkArea) REFERENCES Area(idArea)
+);
+
+CREATE TABLE UsuarioChecklist (
+idUsuarioChecklist INT PRIMARY KEY AUTO_INCREMENT,
+fkUsuario INT,
+fkChecklist INT,
+statusMarcadoChecklist TINYINT NOT NULL DEFAULT 0,
+CONSTRAINT chStatusChecklist CHECK (statusMarcadoChecklist IN (0,1)),
+CONSTRAINT fkUsuarioChecklist FOREIGN KEY (fkUsuario) REFERENCES usuario(idUsuario),
+CONSTRAINT fkChecklistUsuario FOREIGN KEY (fkChecklist) REFERENCES Checklist(idChecklist)
+);
+
+
+
+INSERT INTO conquista (nome, descricao) VALUES
+('Lâmina venerável', 'Recebeu a Kusabimaru de Kuro'),
+('Prótese Shinobi', 'Adquiriu a prótese shinobi'),
+('Ressurreição', 'Retornou dos mortos pela primeira vez'),
+('Dádiva das lágrimas', 'Obteve as lágrimas do dragão'),
+('Gyoubu Masataka Oniwa', 'Derrote Gyoubu'),
+('Senhora Borboleta Fantasma', 'Derrote Lady Butterfly'),
+('Genichiro Ashina', 'Derrote Genichiro'),
+('Macacos do biombo', 'Derrote os macacos do biombo'),
+('Guardião Primata', 'Derrote o macaco guardião'),
+('Grande Shinobi, Coruja', 'Derrote o Coruja'),
+('Monja Corrompida', 'Derrote a monja corrompida'),
+('Imortalidade do Guardião Primata rompida', 'Derrote o guardião primata completamente'),
+('Grande Serpente', 'Derrote a grande serpente'),
+('Isshin Ashina, Divindade da Espada', 'Derrote Isshin completo'),
+('Demônio do Rancor', 'Derrote o demônio do rancor'),
+('Pai superado', 'Derrote Owl (Father)'),
+('Isshin Ashina', 'Derrote Isshin (Shura)'),
+('Multidão Memorial', 'Encontrou a multidão memorial'),
+('Mestre das Artes', 'Adquiriu habilidades especiais'),
+('Andarilho de Ashina', 'Viajou por todas as áreas'),
+('Todas as técnicas de ninjutsu', 'Adquiriu todos os ninjutsus'),
+('Todas as ferramentas prostéticas', 'Adquiriu todas as próteses'),
+('Cabaça curativa definitiva', 'Melhorou totalmente a cura'),
+('Grande carpa colorida', 'Interaja com a carpa gigante'),
+('Auge da força física', 'Maximize atributos'),
+('Melhoria azul vibrante', 'Upgrade com lazulite'),
+('Um homem sem igual', 'Derrote todos os bosses'),
+('Ápice da técnica', 'Domine todas técnicas'),
+('Mestre da prótese', 'Maximize todas as próteses'),
+('Rompimento da Imortalidade', 'Final padrão'),
+('Shura', 'Final Shura'),
+('Regresso do Dragão', 'Final secreto'),
+('Purificação', 'Final Purification'),
+('Sekiro', 'Obtenha todos os troféus');
+
+INSERT INTO Area (nome) VALUES
+('Reservatório Ashina'),
+('Templo Dilapidado'),
+('Arredores de Ashina'),
+('Propriedade Hirata'),
+('Castelo Ashina'),
+('Masmorra Abandonada'),
+('Templo Senpou'),
+('Vale Submerso'),
+('Passagem do Vale'),
+('Profundezas de Ashina'),
+('Vila Mibu'),
+('Palácio da Fonte');
+
+INSERT INTO Checklist (fkArea, nome) VALUES
+(1, 'Genichiro Ashina'),
+(1, 'Líder Shigenori Yamauchi'),
+(1, '3x Pellet'),
+(1, '2x Punhado de Cinzas'),
+(1, 'Kusabimaru'),
+(1, 'Cabaça Curativa'),
+(1, 'Carta Ornamental'),
+(2, '2x Pellet'),
+(2, '1x Bolsa de Moedas Leve'),
+(2, '1x Dente Oculto'),
+(2, '1x Prótese Shinobi'),
+(2, '1x Sino do Pai'),
+(3, 'Sem-Cabeça'),
+(3, 'Ogro Acorrentado'),
+(3, 'Demônio do Rancor'),
+(3, 'Grande Serpente'),
+(3, 'Gyoubu Oniwa'),
+(3, '9x Pellet'),
+(3, '5x Semente Estalo'),
+(3, '2x Açúcar de Ako'),
+(3, '6x Fragmento de Cerâmica'),
+(3, '5x Emblema Espiritual'),
+(3, '4x Açúcar de Ungo'),
+(3, '3x Açúcar de Gachiin'),
+(3, '8x Punhado de Cinzas'),
+(3, '4x Bolsa de Moedas Leve'),
+(3, '3x Balão Mibu de Riqueza'),
+(3, '3x Balão Mibu de Possessão'),
+(3, '1x Grama Divina'),
+(3, '1x Ferro Velho'),
+(3, '2x Semente de Cabaça'),
+(3, '3x Contas de Oração'),
+(3, '1x Roda Shuriken'),
+(3, '1x Pólvora Negra'),
+(3, '1x Barril Mecânico'),
+(3, '1x Memória: Gyoubu Oniwa'),
+(3, '1x Sino do Jovem Lorde'),
+(4, 'Juzou, o Bêbado'),
+(4, 'Caçador Shinobi Enshin'),
+(4, 'Lady Butterfly'),
+(4, 'Coruja (Pai)'),
+(4, '4x Óleo'),
+(4, '8x Pellet'),
+(4, '5x Fragmento de Cerâmica'),
+(4, '5x Pó de Molhar'),
+(4, '2x Pó Antídoto'),
+(4, '6x Emblema Espiritual'),
+(4, '3x Confete Divino'),
+(4, '6x Punhado de Cinzas'),
+(4, '6x Açúcar de Ungo'),
+(4, '1x Barril de Chamas'),
+(4, '1x Machado Shinobi'),
+(4, '1x Penas do Corvo'),
+(4, '3x Contas de Oração'),
+(4, '1x Saquê Bruto'),
+(4, '1x Chave do Templo'),
+(5, 'Touro em Chamas'),
+(5, 'Genichiro Ashina'),
+(5, 'Elite Ashina'),
+(5, '7x Pellet'),
+(5, '10x Fígado de Enguia'),
+(5, '2x Açúcar de Ako'),
+(5, '2x Açúcar de Ungo'),
+(5, '7x Punhado de Cinzas'),
+(5, '7x Fragmento de Cerâmica'),
+(5, '4x Emblema Espiritual'),
+(5, '7x Ferro Velho'),
+(5, '2x Semente de Cabaça'),
+(5, '4x Contas de Oração'),
+(5, '4x Magnetita'),
+(5, '1x Sabimaru'),
+(5, '1x Carta de Isshin'),
+(5, '1x Memória: Genichiro'),
+(5, '1x Chave da Passagem Secreta'),
+(6, 'Guerreiro Shichimen'),
+(6, '1x Óleo'),
+(6, '2x Açúcar de Ako'),
+(6, '6x Agente Calmante'),
+(6, '1x Emblema Espiritual'),
+(6, '1x Ferro Velho'),
+(6, '1x Magnetita'),
+(6, '2x Pólvora Negra'),
+(6, '1x Carta do Prisioneiro'),
+(6, '1x Carta Ensanguentada'),
+(7, 'Guerreiro Shichimen'),
+(7, '6x Agente Calmante'),
+(7, '2x Açúcar de Ako'),
+(7, '1x Ferro Velho'),
+(7, '1x Magnetita'),
+(7, '1x Texto Esotérico Senpou'),
+(8, 'Guerreiro Blindado'),
+(8, 'Centopeia Sen-Un'),
+(8, '6x Pellet'),
+(8, '3x Açúcar de Ako'),
+(8, '4x Açúcar de Ungo'),
+(8, '4x Punhado de Cinzas'),
+(8, '19x Emblema Espiritual'),
+(8, '2x Ferro Velho'),
+(8, '1x Semente de Cabaça'),
+(8, '2x Contas de Oração'),
+(8, '1x Texto Esotérico Senpou'),
+(9, 'Snake Eyes Shirafuji'),
+(9, 'Centopeia Girafa'),
+(9, '2x Pellet'),
+(9, '3x Fígado de Enguia'),
+(9, '3x Semente Estalo'),
+(9, '1x Leque Grande'),
+(9, '1x Semente de Cabaça'),
+(10, 'Guardião Primata'),
+(10, 'Grande Serpente'),
+(10, '2x Pellet'),
+(10, '4x Semente Estalo'),
+(10, '7x Emblema Espiritual'),
+(10, '3x Ferro Velho'),
+(10, '2x Magnetita'),
+(10, '1x Lótus do Palácio'),
+(11, 'Nobre da Névoa'),
+(11, 'Macaco Sem Cabeça'),
+(11, '9x Pellet'),
+(11, '5x Óleo'),
+(11, '3x Emblema Espiritual'),
+(11, '5x Ferro Velho'),
+(11, '4x Contas de Oração'),
+(11, '1x Memória: Macaco Sem Cabeça'),
+(12, 'Dragão Divino'),
+(12, 'Carpa Colorida'),
+(12, '7x Pellet'),
+(12, '6x Confete Divino'),
+(12, '3x Punhado de Cinzas'),
+(12, '3x Contas de Oração'),
+(12, '2x Magnetita'),
+(12, '1x Lágrimas do Dragão'),
+(12, '1x Memória: Dragão Divino');
+
+ALTER TABLE Checklist ADD COLUMN tipo VARCHAR(20) DEFAULT 'item';
+
+UPDATE Checklist SET tipo = 'boss' WHERE idChecklist IN (1, 2, 13, 14, 15, 16, 17, 38, 39, 40, 41, 57, 58, 59, 75, 85, 91, 92, 102, 103, 109, 110, 117, 118, 125, 126);
