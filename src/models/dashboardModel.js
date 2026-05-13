@@ -20,10 +20,10 @@ function conquistaMaisRara() {
 
 function bossMaisTemido() {
     var instrucaoSql = `
-   SELECT COUNT(*) as total, c.nome FROM UsuarioChecklist uc
-   JOIN Checklist c ON uc.fkChecklist = c.idChecklist
-   WHERE c.tipo = 'boss' AND uc.statusMarcadoChecklist = 1
-   GROUP BY uc.fkChecklist
+   SELECT COUNT(*) as total, b.nome FROM UsuarioBoss ub
+   JOIN Boss b ON ub.fkBoss = b.idBoss
+   WHERE ub.statusMarcado = 1
+   GROUP BY ub.fkBoss
    ORDER BY total ASC
    LIMIT 1
     `
@@ -74,12 +74,11 @@ function mediaGlobalPorArea() {
 
 function bossesTaxaDerrota() {
     var instrucaoSql = `
-    SELECT COUNT(uc.fkConquista) * 100 / (SELECT COUNT(*) FROM usuario) as total, c.nome 
-    FROM conquista c
-    LEFT JOIN UsuarioConquista uc ON uc.fkConquista = c.idConquista AND uc.statusMarcado = 1
-    WHERE c.idConquista BETWEEN 5 AND 17
-    GROUP BY c.idConquista
-    ORDER BY c.nome ASC
+    SELECT COUNT(ub.fkBoss) * 100 / (SELECT COUNT(*) FROM usuario) as total, b.nome 
+    FROM Boss b
+    LEFT JOIN UsuarioBoss ub ON ub.fkBoss = b.idBoss AND ub.statusMarcado = 1
+    GROUP BY b.idBoss
+    ORDER BY b.idBoss ASC
     `
     return database.executar(instrucaoSql)
 }

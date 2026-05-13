@@ -4,6 +4,9 @@
    * {
        font-family: 'Cinzel', sans-serif;
        margin: 0;
+   }
+
+   body {
        overflow: hidden;
    }
 
@@ -47,27 +50,28 @@
        font-weight: bold;
    }
 
-.painel-login {
-    position: relative;
-}
-.painel-cadastro{
-    position: relative;
-}
+   .painel-login {
+       position: relative;
+   }
 
-.btn-voltar {
-    position: absolute;
-    top: 20px;
-    left: 30px;
-    color: burlywood;
-    text-decoration: none;
-    font-size: 14px;
-    cursor: pointer;
-    background-color: rgba(0, 0, 0, 0.6);
-    padding: 5px 10px;
-    border-radius: 4px;
-    border: 1px solid burlywood;
-    
-}
+   .painel-cadastro {
+       position: relative;
+   }
+
+   .btn-voltar {
+       position: absolute;
+       top: 20px;
+       left: 30px;
+       color: burlywood;
+       text-decoration: none;
+       font-size: 14px;
+       cursor: pointer;
+       background-color: rgba(0, 0, 0, 0.6);
+       padding: 5px 10px;
+       border-radius: 4px;
+       border: 1px solid burlywood;
+
+   }
 
    .btn-voltar:hover {
        color: rgb(223, 164, 87);
@@ -97,6 +101,7 @@
 
 
    .info {
+       position: relative;
        display: flex;
        flex: 2;
        justify-content: center;
@@ -133,6 +138,7 @@
        padding-bottom: 8px;
        font-size: 16px;
        outline: none;
+       width: 100%;
    }
 
    .formulario input:focus {
@@ -204,9 +210,9 @@
        border-bottom: 2px solid rgb(129, 129, 129);
        outline: none;
        padding-bottom: 8px;
-       width: 94%;
+       width: 100%;
+       box-sizing: border-box;
        padding-right: 30px;
-
    }
 
    .validacao {
@@ -239,4 +245,26 @@
        padding: 10px 15px;
        border-radius: 10px;
        color: black;
+   }
+
+   .toast {
+       position: fixed;
+       top: 100px;
+       left: 50%;
+       transform: translateX(-50%);
+       background-color: #161616;
+       border: 1px solid rgb(223, 164, 87);
+       color: #e6e6e6;
+       padding: 16px 24px;
+       font-family: 'Cinzel', serif;
+       font-size: 12px;
+       letter-spacing: 1px;
+       display: none;
+       pointer-events: none;
+       z-index: 9999;
+       white-space: nowrap;
+   }
+
+   .toast.visivel {
+       display: block;
    }

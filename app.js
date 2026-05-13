@@ -19,7 +19,8 @@ var app = express();
 var usuarioRouter = require("./src/routes/usuarios");
 var conquistaRouter = require("./src/routes/conquistas");
 var mapaRouter = require("./src/routes/mapa");
-var dashboardRouter = require("./src/routes/dashboard")
+var bossRouter = require("./src/routes/boss");
+var dashboardRouter = require("./src/routes/dashboard");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -31,6 +32,7 @@ app.use(cors());
 app.use("/usuarios", usuarioRouter);
 app.use("/conquistas", conquistaRouter);
 app.use("/mapa", mapaRouter);
+app.use("/boss", bossRouter);
 app.use("/dashboard", dashboardRouter);
 
 app.listen(PORTA_APP, function () {

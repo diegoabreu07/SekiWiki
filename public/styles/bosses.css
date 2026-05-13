@@ -151,3 +151,35 @@ body {
     margin: 15px 0;
     border-radius: 8px;
 }
+
+.boss-card label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: #e6e6e6;
+    margin-top: 10px;
+}
+
+.boss-card input[type='checkbox'] {
+    accent-color: rgb(223, 164, 87);
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+.boss-card input[type='checkbox']:checked {
+    background-color: rgb(223, 164, 87);
+}
+
+.boss-card.derrotado {
+    filter: brightness(0.5);
+    border-color: rgba(223, 164, 87, 0.3);
+}
+
+.boss-card.derrotado label {
+    text-decoration: line-through;
+    color: #888;
+}
