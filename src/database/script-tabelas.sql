@@ -4,7 +4,7 @@ USE Sekiwiki;
 CREATE TABLE usuario (
 idUsuario INT PRIMARY KEY AUTO_INCREMENT,
 nome VARCHAR(50),
-email VARCHAR (255),
+email VARCHAR (255) UNIQUE,
 senha VARCHAR (255)
 );
 
@@ -46,7 +46,19 @@ CONSTRAINT fkUsuarioChecklist FOREIGN KEY (fkUsuario) REFERENCES usuario(idUsuar
 CONSTRAINT fkChecklistUsuario FOREIGN KEY (fkChecklist) REFERENCES Checklist(idChecklist)
 );
 
+CREATE TABLE Boss (
+idBoss INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR(100)
+);
 
+CREATE TABLE UsuarioBoss (
+fkUsuario INT,
+fkBoss INT,
+statusMarcado TINYINT NOT NULL DEFAULT 0,
+CONSTRAINT fkUsuarioBoss FOREIGN KEY (fkUsuario) REFERENCES usuario(idUsuario),
+CONSTRAINT fkBossUsuario FOREIGN KEY (fkBoss) REFERENCES Boss(idBoss),
+PRIMARY KEY (fkUsuario, fkBoss)
+);
 
 INSERT INTO conquista (nome, descricao) VALUES
 ('Lâmina venerável', 'Recebeu a Kusabimaru de Kuro'),
@@ -233,6 +245,19 @@ INSERT INTO Checklist (fkArea, nome) VALUES
 (12, '1x Lágrimas do Dragão'),
 (12, '1x Memória: Dragão Divino');
 
-ALTER TABLE Checklist ADD COLUMN tipo VARCHAR(20) DEFAULT 'item';
 
-UPDATE Checklist SET tipo = 'boss' WHERE idChecklist IN (1, 2, 13, 14, 15, 16, 17, 38, 39, 40, 41, 57, 58, 59, 75, 85, 91, 92, 102, 103, 109, 110, 117, 118, 125, 126);
+INSERT INTO Boss (nome) VALUES
+('Gyoubu Masataka Oniwa'),
+('Lady Butterfly'),
+('Genichiro Ashina'),
+('Macacos do Biombo'),
+('Guardião Primata'),
+('Guardião Primata Sem Cabeça'),
+('Monja Corrompida'),
+('Emma & Isshin Ashina'),
+('Grande Shinobi Coruja'),
+('Verdadeira Monja Corrompida'),
+('Dragão Divino'),
+('Coruja (Pai)'),
+('Demônio do Rancor'),
+('Isshin, Divindade da Espada');
