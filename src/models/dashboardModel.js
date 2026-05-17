@@ -31,7 +31,7 @@ function bossMaisTemido() {
 }
 function progressoConquistas(idUsuario) {
     var instrucaoSql = `
-    SELECT COUNT(*) * 100 / 34 as concluidas FROM UsuarioConquista WHERE fkUsuario = ${idUsuario} AND statusMarcado = 1
+    SELECT COUNT(*) as concluidas FROM UsuarioConquista WHERE fkUsuario = ${idUsuario} AND statusMarcado = 1
     `
     return database.executar(instrucaoSql)
 }

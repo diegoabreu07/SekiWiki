@@ -236,7 +236,10 @@
         fetch(`/dashboard/progressoConquistas/${idUsuario}`)
             .then(res => res.json())
             .then(dados => {
-                progressoConquistas = parseFloat(dados[0].concluidas).toFixed(1);
+                let marcadas = dados[0].concluidas
+                let total = 34
+                let porcentagem = (marcadas / total * 100).toFixed(1)
+                progressoConquistas = porcentagem;
             });
 
         fetch(`/dashboard/progressoMapa/${idUsuario}`)
