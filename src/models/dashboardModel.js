@@ -2,13 +2,13 @@ var database = require("../database/config");
 
 function conquistasConcluidas(idUsuario) {
     var instrucaoSql = `
-        SELECT COUNT(*) as concluidas FROM UsuarioConquista WHERE fkUsuario = ${idUsuario} AND statusMarcado = 1
+        SELECT COUNT(*) as concluidas FROM usuarioConquista WHERE fkUsuario = ${idUsuario} AND statusMarcado = 1
     `
     return database.executar(instrucaoSql)
 }
 function conquistaMaisRara() {
     var instrucaoSql = `
-    SELECT COUNT(*) as Mais_rara, c.nome  FROM UsuarioConquista uc
+    SELECT COUNT(*) as Mais_rara, c.nome  FROM usuarioConquista uc
     JOIN conquista c ON uc.fkConquista = c.idConquista
     WHERE statusMarcado = 1
     GROUP BY fkConquista
@@ -20,8 +20,8 @@ function conquistaMaisRara() {
 
 function bossMaisTemido() {
     var instrucaoSql = `
-   SELECT COUNT(*) as total, b.nome FROM UsuarioBoss ub
-   JOIN Boss b ON ub.fkBoss = b.idBoss
+   SELECT COUNT(*) as total, b.nome FROM usuarioBoss ub
+   JOIN boss b ON ub.fkBoss = b.idBoss
    WHERE ub.statusMarcado = 1
    GROUP BY ub.fkBoss
    ORDER BY total ASC
@@ -31,22 +31,22 @@ function bossMaisTemido() {
 }
 function progressoConquistas(idUsuario) {
     var instrucaoSql = `
-    SELECT COUNT(*) as concluidas FROM UsuarioConquista WHERE fkUsuario = ${idUsuario} AND statusMarcado = 1
+    SELECT COUNT(*) as concluidas FROM usuarioConquista WHERE fkUsuario = ${idUsuario} AND statusMarcado = 1
     `
     return database.executar(instrucaoSql)
 }
 function progressoMapa(idUsuario) {
     var instrucaoSql = `
-    SELECT COUNT(*) * 100 / 133 as concluidas FROM UsuarioChecklist WHERE fkUsuario = ${idUsuario} AND statusMarcadoChecklist = 1
+    SELECT COUNT(*) * 100 / 133 as concluidas FROM usuarioChecklist WHERE fkUsuario = ${idUsuario} AND statusMarcadoChecklist = 1
     `
     return database.executar(instrucaoSql)
 }
 function progressoGeral(idUsuario) {
     var instrucaoSql = `
     SELECT (
-        (SELECT COUNT(*) FROM UsuarioChecklist WHERE fkUsuario = ${idUsuario} AND statusMarcadoChecklist = 1)
+        (SELECT COUNT(*) FROM usuarioChecklist WHERE fkUsuario = ${idUsuario} AND statusMarcadoChecklist = 1)
         +
-        (SELECT COUNT(*) FROM UsuarioConquista WHERE fkUsuario = ${idUsuario} AND statusMarcado = 1)
+        (SELECT COUNT(*) FROM usuarioConquista WHERE fkUsuario = ${idUsuario} AND statusMarcado = 1)
     ) * 100 / 167 as concluidas
     `
     return database.executar(instrucaoSql)
@@ -54,9 +54,9 @@ function progressoGeral(idUsuario) {
 function progressoUsuarioPorArea(idUsuario) {
     var instrucaoSql = `
     SELECT a.nome, COUNT(uc.fkChecklist) * 100 / COUNT(c.idChecklist) as porcentagem
-    FROM Area a
-    JOIN Checklist c ON c.fkArea = a.idArea
-    LEFT JOIN UsuarioChecklist uc ON uc.fkChecklist = c.idChecklist AND uc.fkUsuario = ${idUsuario} AND uc.statusMarcadoChecklist = 1
+    FROM area a
+    JOIN checklist c ON c.fkArea = a.idArea
+    LEFT JOIN usuarioChecklist uc ON uc.fkChecklist = c.idChecklist AND uc.fkUsuario = ${idUsuario} AND uc.statusMarcadoChecklist = 1
     GROUP BY a.idArea
      `
     return database.executar(instrucaoSql)
@@ -64,9 +64,9 @@ function progressoUsuarioPorArea(idUsuario) {
 function mediaGlobalPorArea() {
     var instrucaoSql = `
     SELECT a.nome, COUNT(uc.fkChecklist) * 100 / COUNT(c.idChecklist) / COUNT(DISTINCT uc.fkUsuario) as porcentagem
-    FROM Area a
-    JOIN Checklist c ON c.fkArea = a.idArea
-    LEFT JOIN UsuarioChecklist uc ON uc.fkChecklist = c.idChecklist AND uc.statusMarcadoChecklist = 1
+    FROM area a
+    JOIN checklist c ON c.fkArea = a.idArea
+    LEFT JOIN usuarioChecklist uc ON uc.fkChecklist = c.idChecklist AND uc.statusMarcadoChecklist = 1
     GROUP BY a.idArea
      `
     return database.executar(instrucaoSql)
@@ -75,8 +75,8 @@ function mediaGlobalPorArea() {
 function bossesTaxaDerrota() {
     var instrucaoSql = `
     SELECT COUNT(ub.fkBoss) * 100 / (SELECT COUNT(*) FROM usuario) as total, b.nome 
-    FROM Boss b
-    LEFT JOIN UsuarioBoss ub ON ub.fkBoss = b.idBoss AND ub.statusMarcado = 1
+    FROM boss b
+    LEFT JOIN usuarioBoss ub ON ub.fkBoss = b.idBoss AND ub.statusMarcado = 1
     GROUP BY b.idBoss
     ORDER BY b.idBoss ASC
     `

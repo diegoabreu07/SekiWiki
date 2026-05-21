@@ -2,15 +2,15 @@ var database = require("../database/config");
 
 function inserir(idUsuario, idChecklist, status) {
     var instrucaoSql = `
-        SELECT * FROM UsuarioChecklist WHERE fkUsuario = ${idUsuario} AND fkChecklist = ${idChecklist}
+        SELECT * FROM usuarioChecklist WHERE fkUsuario = ${idUsuario} AND fkChecklist = ${idChecklist}
     `;
 
     return database.executar(instrucaoSql)
     .then(resultado => {
         if (resultado.length > 0) {
-            instrucaoSql = `UPDATE UsuarioChecklist SET statusMarcadoChecklist = ${status} WHERE fkUsuario = ${idUsuario} AND fkChecklist = ${idChecklist}`
+            instrucaoSql = `UPDATE usuarioChecklist SET statusMarcadoChecklist = ${status} WHERE fkUsuario = ${idUsuario} AND fkChecklist = ${idChecklist}`
         } else {
-            instrucaoSql = `INSERT INTO UsuarioChecklist (fkUsuario, fkChecklist, statusMarcadoChecklist) VALUES (${idUsuario}, ${idChecklist}, ${status})`
+            instrucaoSql = `INSERT INTO usuarioChecklist (fkUsuario, fkChecklist, statusMarcadoChecklist) VALUES (${idUsuario}, ${idChecklist}, ${status})`
         }
         return database.executar(instrucaoSql)
     }) .catch(e => {
@@ -22,7 +22,7 @@ function listar(idUsuario) {
 
     var instrucaoSql = `
         SELECT c.idChecklist, uc.statusMarcadoChecklist
-        FROM UsuarioChecklist uc
+        FROM usuarioChecklist uc
         JOIN checklist c ON c.idChecklist = uc.fkChecklist
         WHERE uc.fkUsuario = ${idUsuario};
     `;
