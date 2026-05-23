@@ -1,5 +1,5 @@
-CREATE DATABASE Sekiwiki;
-USE Sekiwiki;
+CREATE DATABASE sekiwiki;
+USE sekiwiki;
 
 CREATE TABLE usuario (
 idUsuario INT PRIMARY KEY AUTO_INCREMENT,
@@ -14,7 +14,7 @@ nome VARCHAR(100),
 descricao VARCHAR(255)
 );
 
-CREATE TABLE UsuarioConquista (
+CREATE TABLE usuarioConquista (
 fkUsuario INT,
 CONSTRAINT fkUsuario FOREIGN KEY (fkUsuario) REFERENCES usuario(idUsuario),
 fkConquista INT,
@@ -24,39 +24,39 @@ CONSTRAINT chStatus CHECK (statusMarcado IN (0,1)),
 PRIMARY KEY (fkUsuario, fkConquista)
 );
 
-CREATE TABLE Area (
+CREATE TABLE area (
 idArea INT PRIMARY KEY AUTO_INCREMENT,
 nome VARCHAR(100)
 );
 
-CREATE TABLE Checklist (
+CREATE TABLE checklist (
 idChecklist INT PRIMARY KEY AUTO_INCREMENT,
 fkArea INT,
 nome VARCHAR(255),
-CONSTRAINT fkAreaChecklist FOREIGN KEY (fkArea) REFERENCES Area(idArea)
+CONSTRAINT fkAreaChecklist FOREIGN KEY (fkArea) REFERENCES area(idArea)
 );
 
-CREATE TABLE UsuarioChecklist (
+CREATE TABLE usuarioChecklist (
 idUsuarioChecklist INT PRIMARY KEY AUTO_INCREMENT,
 fkUsuario INT,
 fkChecklist INT,
 statusMarcadoChecklist TINYINT NOT NULL DEFAULT 0,
 CONSTRAINT chStatusChecklist CHECK (statusMarcadoChecklist IN (0,1)),
 CONSTRAINT fkUsuarioChecklist FOREIGN KEY (fkUsuario) REFERENCES usuario(idUsuario),
-CONSTRAINT fkChecklistUsuario FOREIGN KEY (fkChecklist) REFERENCES Checklist(idChecklist)
+CONSTRAINT fkChecklistUsuario FOREIGN KEY (fkChecklist) REFERENCES checklist(idChecklist)
 );
 
-CREATE TABLE Boss (
+CREATE TABLE boss (
 idBoss INT PRIMARY KEY AUTO_INCREMENT,
 nome VARCHAR(100)
 );
 
-CREATE TABLE UsuarioBoss (
+CREATE TABLE usuarioBoss (
 fkUsuario INT,
 fkBoss INT,
 statusMarcado TINYINT NOT NULL DEFAULT 0,
 CONSTRAINT fkUsuarioBoss FOREIGN KEY (fkUsuario) REFERENCES usuario(idUsuario),
-CONSTRAINT fkBossUsuario FOREIGN KEY (fkBoss) REFERENCES Boss(idBoss),
+CONSTRAINT fkBossUsuario FOREIGN KEY (fkBoss) REFERENCES boss(idBoss),
 PRIMARY KEY (fkUsuario, fkBoss)
 );
 
@@ -96,7 +96,7 @@ INSERT INTO conquista (nome, descricao) VALUES
 ('Purificação', 'Final Purification'),
 ('Sekiro', 'Obtenha todos os troféus');
 
-INSERT INTO Area (nome) VALUES
+INSERT INTO area (nome) VALUES
 ('Reservatório Ashina'),
 ('Templo Dilapidado'),
 ('Arredores de Ashina'),
@@ -110,7 +110,7 @@ INSERT INTO Area (nome) VALUES
 ('Vila Mibu'),
 ('Palácio da Fonte');
 
-INSERT INTO Checklist (fkArea, nome) VALUES
+INSERT INTO checklist (fkArea, nome) VALUES
 (1, 'Genichiro Ashina'),
 (1, 'Líder Shigenori Yamauchi'),
 (1, '3x Pellet'),
@@ -246,7 +246,7 @@ INSERT INTO Checklist (fkArea, nome) VALUES
 (12, '1x Memória: Dragão Divino');
 
 
-INSERT INTO Boss (nome) VALUES
+INSERT INTO boss (nome) VALUES
 ('Gyoubu Masataka Oniwa'),
 ('Lady Butterfly'),
 ('Genichiro Ashina'),
@@ -262,7 +262,8 @@ INSERT INTO Boss (nome) VALUES
 ('Demônio do Rancor'),
 ('Isshin, Divindade da Espada');
 
-INSERT INTO UsuarioConquista (fkUsuario, fkConquista, statusMarcado) VALUES
+
+INSERT INTO usuarioConquista (fkUsuario, fkConquista, statusMarcado) VALUES
 (3, 8, 1),
 (3, 2, 1),
 (3, 18, 1),
@@ -710,7 +711,7 @@ INSERT INTO UsuarioConquista (fkUsuario, fkConquista, statusMarcado) VALUES
 (31, 10, 1),
 (31, 27, 1);
 
-INSERT INTO UsuarioBoss (fkUsuario, fkBoss, statusMarcado) VALUES
+INSERT INTO usuarioBoss (fkUsuario, fkBoss, statusMarcado) VALUES
 (3, 1, 1),
 (3, 11, 1),
 (3, 4, 1),
@@ -954,7 +955,7 @@ INSERT INTO UsuarioBoss (fkUsuario, fkBoss, statusMarcado) VALUES
 (31, 12, 1),
 (31, 2, 1);
 
-INSERT INTO UsuarioChecklist (fkUsuario, fkChecklist, statusMarcadoChecklist) VALUES
+INSERT INTO usuarioChecklist (fkUsuario, fkChecklist, statusMarcadoChecklist) VALUES
 (3, 80, 1),
 (3, 28, 1),
 (3, 7, 1),
