@@ -63,10 +63,17 @@ function progressoUsuarioPorArea(idUsuario) {
 }
 function mediaGlobalPorArea() {
     var instrucaoSql = `
-    SELECT a.nome, COUNT(uc.fkChecklist) * 100 / COUNT(c.idChecklist) / (SELECT COUNT(*) FROM usuario) as porcentagem
+    SELECT a.nome,
+        AVG(
+            (SELECT COUNT(*) FROM usuarioChecklist uc2 
+             WHERE uc2.fkUsuario = u.idUsuario 
+             AND uc2.fkChecklist IN (SELECT idChecklist FROM checklist WHERE fkArea = a.idArea)
+             AND uc2.statusMarcadoChecklist = 1)
+            * 100.0 /
+            (SELECT COUNT(*) FROM checklist WHERE fkArea = a.idArea)
+        ) as porcentagem
     FROM area a
-    JOIN checklist c ON c.fkArea = a.idArea
-    LEFT JOIN usuarioChecklist uc ON uc.fkChecklist = c.idChecklist AND uc.statusMarcadoChecklist = 1
+    CROSS JOIN usuario u
     GROUP BY a.idArea
      `
     return database.executar(instrucaoSql)
