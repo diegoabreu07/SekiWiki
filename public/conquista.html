@@ -17,12 +17,12 @@
                 <li><a href="mapa.html">Mapa</a></li>
                 <li><a href="bosses.html">Bosses</a></li>
                 <li class="atual"><a href="#">Conquistas</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
             </ul>
             <div class="usuario">
                 <img src="assets/img/usuario-index.png" alt="" id="usuarioIcon">
                 <div class="usuario-dropdown" id="usuarioDropdown">
-                    <a href="dashboard.html">Dashboard</a>
-                    <a href="index.html">Sair</a>
+                    <a onclick="sair()">Sair</a>
                 </div>
             </div>
         </div>
@@ -269,7 +269,10 @@
             }
 
         });
-
+    function sair() {
+        sessionStorage.clear()
+        window.location = 'index.html'
+    }
 </script>
 
 </html>

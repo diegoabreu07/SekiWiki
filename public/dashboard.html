@@ -35,7 +35,7 @@
                 <img src="assets/img/usuario-index.png" alt="" class="usuario-avatar">
                 <span class="usuario-nome" id="nomeUsuario">Jogador</span>
             </div>
-            <a href="index.html" class="btn-sair">Sair</a>
+            <a onclick="sair()" class="btn-sair">Sair</a>
         </div>
     </aside>
 
@@ -50,7 +50,7 @@
                 <div class="kpi-desc">menos derrotado entre os jogadores</div>
             </div>
             <div class="kpi-card">
-                <div class="kpi-label">Progresso Geral</div>
+                <div class="kpi-label">Seu Progresso Geral</div>
                 <div class="kpi-toggle">
                     <span class="toggle-item ativo" onclick="trocarProgresso('geral')">Geral</span>
                     <span class="toggle-item" onclick="trocarProgresso('conquistas')">Conquistas</span>
@@ -68,15 +68,15 @@
 
         <div class="graficos">
             <div class="grafico-card">
-                <div class="grafico-titulo"><span>Conquistas</span> Concluídas vs Pendentes</div>
+                <div class="grafico-titulo"><span>Suas Conquistas</span> Concluídas vs Pendentes</div>
                 <canvas id="graficoConquistas" class="canvas-conquistas"></canvas>
             </div>
             <div class="grafico-card">
-                <div class="grafico-titulo">Taxa de Derrota por <span>Boss</span></div>
+                <div class="grafico-titulo">Taxa de Derrota por <span>Boss</span> dos Jogadores</div>
                 <canvas id="graficoBosses" class="canvas-bosses"></canvas>
             </div>
             <div class="grafico-card grafico-full">
-                <div class="grafico-titulo">Você vs <span>Média Global</span> por Área</div>
+                <div class="grafico-titulo"><span>Você</span> vs Média Global por Área</div>
                 <canvas id="graficoComparativo"></canvas>
             </div>
         </div>
@@ -87,11 +87,11 @@
 
         const gold = "rgb(223, 164, 87)";
         const goldTransp = "rgba(223, 164, 87, 0.15)";
-        const cinza = "rgba(150, 150, 150, 0.5)";
+        const cinza = "rgba(255, 255, 255, 0.3)";
         const cinzaTransp = "rgba(150, 150, 150, 0.15)";
         const defaultFont = { family: "Cinzel, serif", size: 11 };
 
-        Chart.defaults.color = "#888";
+        Chart.defaults.color = "rgb(255,255,255)";
         Chart.defaults.font = defaultFont;
 
         const areas = [
@@ -163,7 +163,7 @@
                 labels: ["Concluídas", "Pendentes"],
                 datasets: [{
                     data: [20, 14],
-                    backgroundColor: [gold, "rgba(255,255,255,0.08)"],
+                    backgroundColor: [gold, "rgba(255,255,255,0.3)"],
                     borderColor: ["rgba(0,0,0,0.3)", "rgba(255,255,255,0.05)"],
                     borderWidth: 2,
                 }]
@@ -188,14 +188,14 @@
                     {
                         label: "Você",
                         data: [75, 60, 55, 50, 65, 40, 70, 45, 35, 50, 55, 30],
-                        backgroundColor: goldTransp,
+                        backgroundColor: gold,
                         borderColor: gold,
                         borderWidth: 1,
                     },
                     {
                         label: "Média Global",
                         data: [100, 80, 60, 40, 70, 30, 90, 50, 20, 65, 45, 10],
-                        backgroundColor: cinzaTransp,
+                        backgroundColor: cinza,
                         borderColor: cinza,
                         borderWidth: 1,
                     }
@@ -321,6 +321,10 @@
                 graficoBosses.update();
             })
 
+        function sair() {
+            sessionStorage.clear()
+            window.location = 'index.html'
+        }
     </script>
 
 </body>

@@ -11,8 +11,8 @@
     --bg-card: #161616;
     --bg-sidebar: #0a0a0a;
     --border: rgba(223, 164, 87, 0.3);
-    --text: #e6e6e6;
-    --text-muted: #888;
+    --text: rgb(255,255,255);
+    --text-muted: rgb(255,255,255);
 }
 
 body {
@@ -219,11 +219,14 @@ body {
     color: var(--text-muted);
     cursor: pointer;
     text-transform: uppercase;
+    border: 1px solid rgb(255,255,255);
+    padding: 3px;
+    margin-right: 7px;
 }
 
 .toggle-item.ativo {
     color: var(--gold);
-    border-bottom: 1px solid var(--gold);
+    border: 1px solid var(--gold);
 }
 
 .graficos {
