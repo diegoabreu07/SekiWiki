@@ -117,7 +117,7 @@
        gap: 40px;
        padding: 20px;
        margin-bottom: 300px;
-       background: rgba(14, 13, 13, 0.75);
+       background: rgba(14, 13, 13, 0.85);
        border-radius: 10px;
        text-align: center;
        border: 2px solid burlywood;
@@ -216,14 +216,14 @@
    }
 
    .validacao {
-       color: rgb(217, 16, 16);
-       font-size: 12px;
+       color: rgb(255, 0, 0);
+       font-size: 14px;
        padding-top: 5px;
    }
 
    .validacao2 {
-       color: rgb(217, 16, 16);
-       font-size: 12px;
+       color: rgb(255, 0, 0);
+       font-size: 14px;
        padding-top: 5px;
    }
 
